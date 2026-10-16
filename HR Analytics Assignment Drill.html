@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Comprehensive interactive drill for NPTEL HR Analytics course (IIT Roorkee, Weeks 1 to 12) with instant feedback, mastery tracker, and offline PWA capability.">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="HR Drill">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <title>HR Analytics Assignment Drill · NPTEL IIT Roorkee</title>
+
+  <!-- Preconnect and Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       CSS Design System & Tokens
+       ========================================================================== */
+    :root {
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      
+      /* Dark Theme (Default) */
+      --bg: #090d16;
+      --bg-subtle: #0f172a;
+      --card: #141d33;
+      --card-hover: #19243f;
+      --card-border: #1e293b;
+      --card-border-hover: #334155;
+      --tx: #f8fafc;
+      --tx-muted: #94a3b8;
+      --tx-dim: #64748b;
+      
+      --accent: #f97316;
+      --accent-hover: #ea580c;
+      --accent-glow: rgba(249, 115, 22, 0.25);
+      --accent-grad: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+      
+      --ok: #10b981;
+      --ok-bg: rgba(16, 185, 129, 0.12);
+      --ok-border: rgba(16, 185, 129, 0.45);
+      --ok-glow: rgba(16, 185, 129, 0.2);
+      
+      --no: #f43f5e;
+      --no-bg: rgba(244, 63, 94, 0.12);
+      --no-border: rgba(244, 63, 94, 0.45);
+      --no-glow: rgba(244, 63, 94, 0.2);
+      
+      --star: #fbbf24;
+      --star-bg: rgba(251, 191, 36, 0.15);
+      
+      --header-bg: rgba(9, 13, 22, 0.85);
+      --badge-bg: rgba(255, 255, 255, 0.06);
+      --badge-border: rgba(255, 255, 255, 0.1);
+      
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.45);
+      
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+      
+      color-scheme: dark;
+    }
+
+    /* Light Theme */
+    :root[data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-subtle: #f1f5f9;
+      --card: #ffffff;
+      --card-hover: #fcfdfe;
+      --card-border: #e2e8f0;
+      --card-border-hover: #cbd5e1;
+      --tx: #0f172a;
+      --tx-muted: #64748b;
+      --tx-dim: #94a3b8;
+      
+      --accent: #ea580c;
+      --accent-hover: #c2410c;
+      --accent-glow: rgba(234, 88, 12, 0.18);
+      --accent-grad: linear-gradient(135deg, #ea580c 0%, #db2777 100%);
+      
+      --ok: #059669;
+      --ok-bg: #ecfdf5;
+      --ok-border: #a7f3d0;
+      --ok-glow: rgba(5, 150, 105, 0.15);
+      
+      --no: #e11d48;
+      --no-bg: #fff1f2;
+      --no-border: #fecdd3;
+      --no-glow: rgba(225, 29, 72, 0.15);
+      
+      --star: #d97706;
+      --star-bg: #fef3c7;
+      
+      --header-bg: rgba(248, 250, 252, 0.88);
+      --badge-bg: #e2e8f0;
+      --badge-border: #cbd5e1;
+      
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+      
+      color-scheme: light;
+    }
+
+    /* Base Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--tx);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      padding-bottom: env(safe-area-inset-bottom, 24px);
+    }
+
+    /* Container */
+    .app-wrap {
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px 20px 80px;
+    }
+
+    /* Top Hero Header */
+    .header-hero {
+      padding: 24px 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .top-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .org-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .actions-cluster {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      color: var(--tx-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .icon-btn:hover {
+      background: var(--card-hover);
+      color: var(--tx);
+      border-color: var(--card-border-hover);
+      transform: translateY(-1px);
+    }
+    .icon-btn:active {
+      transform: translateY(0);
+    }
+    .icon-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    h1 {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      background: var(--accent-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: 4px;
+    }
+
+    .subtitle {
+      color: var(--tx-muted);
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 680px;
+    }
+
+    /* ==========================================================================
+       Dashboard / Mastery Stats Bar
+       ========================================================================== */
+    .dashboard-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      margin: 16px 0;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .dashboard-card {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    /* Circular Mastery Progress */
+    .gauge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .circle-chart {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      flex-shrink: 0;
+    }
+    .circle-chart svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .circle-bg {
+      fill: none;
+      stroke: var(--badge-bg);
+      stroke-width: 4.5;
+    }
+    .circle-fg {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 4.5;
+      stroke-linecap: round;
+      stroke-dasharray: 283;
+      stroke-dashoffset: 283;
+      transition: stroke-dashoffset 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .gauge-center-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--tx);
+    }
+
+    /* Stats Grid */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    @media (max-width: 640px) {
+      .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .stat-pill {
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--tx-dim);
+    }
+    .stat-val {
+      font-size: 16px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--tx);
+    }
+    .stat-val.ok { color: var(--ok); }
+    .stat-val.no { color: var(--no); }
+
+    .quick-cta-btn {
+      background: var(--accent-grad);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 10px 18px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px var(--accent-glow);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .quick-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--accent-glow);
+    }
+    .quick-cta-btn:active {
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       Sticky Control Bar & Filters
+       ========================================================================== */
+    .sticky-bar {
+      position: sticky;
+      top: env(safe-area-inset-top, 0px);
+      background: var(--header-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 100;
+      padding: 12px 0 10px;
+      margin: 0 -20px 16px;
+      padding-left: 20px;
+      padding-right: 20px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Search and Quick Filters Row */
+    .controls-upper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .search-box-wrap {
+      position: relative;
+      flex: 1 1 240px;
+    }
+    .search-input {
+      width: 100%;
+      height: 38px;
+      padding: 0 34px 0 36px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      color: var(--tx);
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .search-icon-left {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      color: var(--tx-dim);
+      pointer-events: none;
+    }
+    .search-clear-btn {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--tx-dim);
+      cursor: pointer;
+      display: none;
+      padding: 4px;
+      border-radius: 50%;
+    }
+    .search-clear-btn.active { display: block; }
+    .search-clear-btn:hover { color: var(--tx); }
+
+    /* Filter Chips */
+    .filter-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .chip-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      color: var(--tx-muted);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .chip-btn:hover {
+      background: var(--card-hover);
+      color: var(--tx);
+      border-color: var(--card-border-hover);
+    }
+    .chip-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      font-weight: 600;
+      box-shadow: 0 2px 8px var(--accent-glow);
+    }
+    .chip-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: var(--radius-full);
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .chip-btn:not(.active) .chip-badge {
+      background: var(--badge-bg);
+      color: var(--tx-dim);
+    }
+
+    /* Week Carousel / Pills */
+    .week-nav-bar {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+    }
+    .week-nav-bar::-webkit-scrollbar {
+      height: 4px;
+    }
+    .week-nav-bar::-webkit-scrollbar-thumb {
+      background: var(--card-border);
+      border-radius: 4px;
+    }
+    .week-pill {
+      flex-shrink: 0;
+      padding: 5px 11px;
+      border-radius: var(--radius-sm);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      color: var(--tx-muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .week-pill:hover {
+      background: var(--card-hover);
+      color: var(--tx);
+    }
+    .week-pill.active {
+      background: var(--accent-grad);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 2px 8px var(--accent-glow);
+    }
+    .week-pill .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ok);
+      display: none;
+    }
+    .week-pill.mastered .dot {
+      display: inline-block;
+    }
+
+    /* Settings & Options bar */
+    .controls-lower {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--tx-muted);
+    }
+    .toggle-labels {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .toggle-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toggle-label input[type="checkbox"] {
+      accent-color: var(--accent);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       Questions List & Card Component
+       ========================================================================== */
+    .questions-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .q-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      scroll-margin-top: 190px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      position: relative;
+    }
+    .q-card:hover {
+      border-color: var(--card-border-hover);
+    }
+    .q-card.focused {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .q-card.status-correct {
+      border-left: 4px solid var(--ok);
+    }
+    .q-card.status-incorrect {
+      border-left: 4px solid var(--no);
+    }
+
+    /* Card Meta Header */
+    .q-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 8px;
+    }
+    .q-tags {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tag-week {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+    }
+    .tag-num {
+      font-size: 12px;
+      color: var(--tx-dim);
+      font-weight: 600;
+    }
+
+    /* Star Bookmark Button */
+    .star-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: var(--tx-dim);
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .star-btn:hover {
+      color: var(--star);
+      transform: scale(1.15);
+    }
+    .star-btn.starred {
+      color: var(--star);
+    }
+    .star-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Question Text */
+    .q-prompt {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--tx);
+      margin-bottom: 16px;
+    }
+    .q-prompt mark {
+      background: rgba(249, 115, 22, 0.25);
+      color: var(--tx);
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+
+    /* Options List */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .opt-btn {
+      width: 100%;
+      text-align: left;
+      background: var(--bg-subtle);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      font-family: inherit;
+      font-size: 14.5px;
+      color: var(--tx);
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 28px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      transition: all 0.15s ease;
+    }
+    .opt-btn:hover:not(:disabled) {
+      background: var(--card-hover);
+      border-color: var(--accent);
+      transform: translateX(3px);
+    }
+    .opt-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Letter Badge (A, B, C, D) */
+    .opt-letter {
+      width: 26px;
+      height: 26px;
+      border-radius: var(--radius-sm);
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--tx-muted);
+      flex-shrink: 0;
+    }
+
+    .opt-text {
+      line-height: 1.45;
+    }
+
+    .opt-key-hint {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--tx-dim);
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      padding: 1px 5px;
+      border-radius: 4px;
+      opacity: 0.6;
+    }
+
+    /* Selected Option States */
+    .opt-btn.is-correct {
+      background: var(--ok-bg) !important;
+      border-color: var(--ok) !important;
+      color: var(--tx) !important;
+      box-shadow: 0 0 12px var(--ok-glow);
+    }
+    .opt-btn.is-correct .opt-letter {
+      background: var(--ok);
+      border-color: var(--ok);
+      color: #ffffff;
+    }
+
+    .opt-btn.is-incorrect {
+      background: var(--no-bg) !important;
+      border-color: var(--no) !important;
+      color: var(--tx) !important;
+      box-shadow: 0 0 12px var(--no-glow);
+    }
+    .opt-btn.is-incorrect .opt-letter {
+      background: var(--no);
+      border-color: var(--no);
+      color: #ffffff;
+    }
+
+    .opt-btn.reveal-correct {
+      background: var(--ok-bg) !important;
+      border-color: var(--ok) !important;
+      border-style: dashed;
+    }
+    .opt-btn.reveal-correct .opt-letter {
+      background: var(--ok);
+      color: #ffffff;
+    }
+
+    /* Feedback Box */
+    .feedback-box {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      animation: fadeIn 0.25s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .feedback-box.is-correct {
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+      color: var(--ok);
+    }
+    .feedback-box.is-incorrect {
+      background: var(--no-bg);
+      border: 1px solid var(--no-border);
+      color: var(--no);
+    }
+    .feedback-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .feedback-main {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .feedback-sub {
+      font-size: 13px;
+      color: var(--tx);
+      opacity: 0.95;
+    }
+
+    /* Note Banner for Week 11 Q9 / Week 4 Q8 */
+    .explanation-callout {
+      margin-top: 8px;
+      padding: 8px 12px;
+      background: rgba(249, 115, 22, 0.1);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--tx);
+    }
+    .explanation-callout strong {
+      color: var(--accent);
+    }
+
+    /* Card Footer Actions */
+    .q-foot-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .btn-retry {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--tx-muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+    }
+    .btn-retry:hover {
+      background: var(--card-hover);
+      color: var(--tx);
+      border-color: var(--card-border-hover);
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      background: var(--card);
+      border: 1px dashed var(--card-border);
+      border-radius: var(--radius-lg);
+      margin: 24px 0;
+    }
+    .empty-state h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+      color: var(--tx);
+    }
+    .empty-state p {
+      color: var(--tx-muted);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    /* Floating Action Buttons */
+    .fab-cluster {
+      position: fixed;
+      right: 20px;
+      bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 90;
+    }
+    .fab-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      color: var(--tx);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .fab-btn:hover {
+      background: var(--card-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+    .fab-btn.primary {
+      background: var(--accent-grad);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+
+    /* ==========================================================================
+       Modals / Dialogs
+       ========================================================================== */
+    dialog {
+      margin: auto;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      background: var(--card);
+      color: var(--tx);
+      padding: 24px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: var(--shadow-lg);
+    }
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+    }
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .modal-head h3 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .modal-close-btn {
+      background: none;
+      border: none;
+      color: var(--tx-dim);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: var(--radius-sm);
+    }
+    .modal-close-btn:hover {
+      color: var(--tx);
+    }
+    .modal-body {
+      font-size: 14px;
+      color: var(--tx-muted);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .shortcut-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .shortcut-table td {
+      padding: 8px 4px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .shortcut-key {
+      font-family: var(--font-mono);
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      padding: 2px 7px;
+      border-radius: 4px;
+      color: var(--tx);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .modal-foot {
+      margin-top: 20px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .btn-secondary {
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      color: var(--tx);
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn-danger {
+      background: var(--no);
+      border: none;
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--card-border);
+      color: var(--tx-dim);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    .footer-notes {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--tx-muted);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow-lg);
+      padding: 10px 18px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--tx);
+      z-index: 1000;
+      pointer-events: none;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-wrap">
+    
+    <!-- Top Meta & Title Section -->
+    <header class="header-hero">
+      <div class="top-meta">
+        <div class="org-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          NPTEL · IIT Roorkee · HR Analytics
+        </div>
+
+        <div class="actions-cluster">
+          <!-- Audio Feedback Toggle -->
+          <button class="icon-btn" id="audioToggleBtn" title="Toggle Sound Feedback (Web Audio)" aria-label="Toggle sound feedback">
+            <svg id="audioIconOn" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            <svg id="audioIconOff" style="display:none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+          </button>
+
+          <!-- Theme Mode Toggle -->
+          <button class="icon-btn" id="themeToggleBtn" title="Toggle Dark / Light Theme" aria-label="Toggle color theme">
+            <svg id="themeIconDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg id="themeIconLight" style="display:none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+
+          <!-- Keyboard Shortcuts Help -->
+          <button class="icon-btn" id="shortcutsBtn" title="Keyboard Shortcuts (?)" aria-label="Keyboard shortcuts">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M6 8h.001M10 8h.001M14 8h.001M18 8h.001M8 12h.001M12 12h.001M16 12h.001M7 16h10" /></svg>
+          </button>
+
+          <!-- Share / Copy Score Summary -->
+          <button class="icon-btn" id="shareBtn" title="Copy Progress Summary" aria-label="Copy progress summary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          </button>
+
+          <!-- Reset Progress Dialog Trigger -->
+          <button class="icon-btn" id="resetModalTrigger" title="Reset Drill Progress" aria-label="Reset drill progress">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <h1>HR Analytics Drill</h1>
+      <p class="subtitle">Complete question drill for Assignments 1 to 12 (120 questions). Progress is automatically saved locally. Shuffle questions, target mistakes, and prepare for your NPTEL certification exam.</p>
+    </header>
+
+    <!-- Interactive Mastery Dashboard -->
+    <section class="dashboard-card" aria-label="Drill Performance Dashboard">
+      <div class="gauge-wrap">
+        <div class="circle-chart">
+          <svg viewBox="0 0 100 100">
+            <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+            <circle class="circle-fg" id="gaugeRing" cx="50" cy="50" r="45"></circle>
+          </svg>
+          <div class="gauge-center-text" id="gaugePercent">0%</div>
+        </div>
+        <div>
+          <div style="font-weight:700; font-size:15px; color:var(--tx)">Course Mastery</div>
+          <div style="font-size:12px; color:var(--tx-muted)" id="masterySubtext">0 of 120 mastered</div>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-pill">
+          <span class="stat-label">Attempted</span>
+          <span class="stat-val" id="statAttempted">0 / 120</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">Correct</span>
+          <span class="stat-val ok" id="statCorrect">0</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">Accuracy</span>
+          <span class="stat-val" id="statAccuracy">0%</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">Starred</span>
+          <span class="stat-val" id="statStarred" style="color:var(--star)">0</span>
+        </div>
+      </div>
+
+      <button class="quick-cta-btn" id="nextUnansweredBtn">
+        Next Unanswered
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </button>
+    </section>
+
+    <!-- Sticky Navigation & Filter Bar -->
+    <nav class="sticky-bar" aria-label="Filters and navigation">
+      <!-- Search and Filter Chips -->
+      <div class="controls-upper">
+        <div class="search-box-wrap">
+          <svg class="search-icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search keywords (e.g. compa ratio, BARS, Tableau)..." aria-label="Search questions">
+          <button id="searchClearBtn" class="search-clear-btn" aria-label="Clear search">✕</button>
+        </div>
+
+        <div class="filter-chips" role="radiogroup" aria-label="Filter questions by status">
+          <button class="chip-btn active" data-filter="all">All <span class="chip-badge" id="badgeAll">120</span></button>
+          <button class="chip-btn" data-filter="unanswered">Unanswered <span class="chip-badge" id="badgeUnanswered">120</span></button>
+          <button class="chip-btn" data-filter="incorrect">Mistakes <span class="chip-badge" id="badgeIncorrect">0</span></button>
+          <button class="chip-btn" data-filter="starred">⭐ Starred <span class="chip-badge" id="badgeStarred">0</span></button>
+        </div>
+      </div>
+
+      <!-- Week Carousel -->
+      <div class="week-nav-bar" id="weekNavBar" role="tablist" aria-label="Select assignment week">
+        <!-- Generated dynamically in JS -->
+      </div>
+
+      <!-- Settings & Shuffling -->
+      <div class="controls-lower">
+        <div class="toggle-labels">
+          <label class="toggle-label" title="Shuffle questions order">
+            <input type="checkbox" id="shuffleToggle">
+            <span>Shuffle questions</span>
+          </label>
+          <label class="toggle-label" title="Shuffle option choices order">
+            <input type="checkbox" id="shuffleOptsToggle">
+            <span>Shuffle options</span>
+          </label>
+        </div>
+        <div id="resultsSummaryText" style="font-family:var(--font-mono); font-size:12px; color:var(--tx-dim)">
+          Showing 120 questions
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Question Stream -->
+    <main id="questionsStream" class="questions-stream" aria-live="polite">
+      <!-- Question cards injected dynamically -->
+    </main>
+
+    <!-- Footer Notes & Official Discrepancy Clarifications -->
+    <footer>
+      <p>Answers strictly adhere to the official NPTEL IIT Roorkee answer keys.</p>
+      <div class="footer-notes">
+        <strong>Important Exam Notes:</strong>
+        <ul style="margin: 6px 0 0 18px; line-height: 1.5;">
+          <li><strong>Week 11 Q9:</strong> NPTEL sheet officially marks <em>"annual tax rate"</em>, but standard compensation analytics defines Compa Ratio as <code>Current Pay / Range Midpoint</code>. Midpoint is marked here as the correct analytical definition.</li>
+          <li><strong>Week 4 Q8:</strong> Option (Structured) describes predetermined job-related questions, but NPTEL key specifically marked <em>Behavioural</em>.</li>
+        </ul>
+      </div>
+      <p style="margin-top: 14px; color:var(--tx-dim); font-size:12px;">
+        Designed for offline study & mobile installation (PWA ready). Built for IIT Roorkee HR Analytics course participants.
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- Floating Navigation Cluster -->
+  <aside class="fab-cluster" aria-label="Quick actions">
+    <button class="fab-btn primary" id="fabNextUnanswered" title="Scroll to Next Unanswered" aria-label="Next unanswered question">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="7 13 12 18 17 13"></polyline><polyline points="7 6 12 11 17 6"></polyline></svg>
+    </button>
+    <button class="fab-btn" id="fabScrollTop" title="Scroll to top" aria-label="Scroll to top">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+    </button>
+  </aside>
+
+  <!-- Keyboard Shortcuts Dialog -->
+  <dialog id="shortcutsDialog" aria-labelledby="shortcutsTitle">
+    <div class="modal-head">
+      <h3 id="shortcutsTitle">⌨️ Keyboard Shortcuts</h3>
+      <button class="modal-close-btn" onclick="document.getElementById('shortcutsDialog').close()" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="modal-body">
+      <table class="shortcut-table">
+        <tbody>
+          <tr><td><span class="shortcut-key">1</span> <span class="shortcut-key">2</span> <span class="shortcut-key">3</span> <span class="shortcut-key">4</span></td><td>Select Option A, B, C, D on focused question</td></tr>
+          <tr><td><span class="shortcut-key">N</span> or <span class="shortcut-key">J</span></td><td>Jump to next unanswered question</td></tr>
+          <tr><td><span class="shortcut-key">P</span> or <span class="shortcut-key">K</span></td><td>Jump to previous question</td></tr>
+          <tr><td><span class="shortcut-key">S</span></td><td>Star / bookmark focused question</td></tr>
+          <tr><td><span class="shortcut-key">/</span></td><td>Focus search bar</td></tr>
+          <tr><td><span class="shortcut-key">Esc</span></td><td>Clear search / close dialog</td></tr>
+          <tr><td><span class="shortcut-key">?</span></td><td>Open this shortcuts guide</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-secondary" onclick="document.getElementById('shortcutsDialog').close()">Got it</button>
+    </div>
+  </dialog>
+
+  <!-- Reset Confirmation Dialog -->
+  <dialog id="resetConfirmDialog" aria-labelledby="resetDialogTitle">
+    <div class="modal-head">
+      <h3 id="resetDialogTitle">Reset Drill Progress?</h3>
+      <button class="modal-close-btn" onclick="document.getElementById('resetConfirmDialog').close()" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="modal-body">
+      <p>This will erase your answered questions, reset scores, and reshuffle question order. Starred/bookmarked questions will be preserved unless you choose to clear them as well.</p>
+      <label class="toggle-label" style="margin-top:6px;">
+        <input type="checkbox" id="clearStarredCheckbox">
+        <span>Also clear my starred bookmarks</span>
+      </label>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-secondary" onclick="document.getElementById('resetConfirmDialog').close()">Cancel</button>
+      <button class="btn-danger" id="confirmResetBtn">Reset Progress</button>
+    </div>
+  </dialog>
+
+  <!-- Toast Notification Pill -->
+  <div id="toastNotification" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- ==========================================================================
+       Application Data & Logic
+       ========================================================================== -->
+  <script>
+    // 120 Verified Questions from NPTEL HR Analytics (IIT Roorkee, Weeks 1 to 12)
+    const RAW_DATA = `1|Which is NOT a descriptive analytics tool in HR?|Decision trees and random forests|Mean and standard deviation|Counts and ratios|Mode and median
+1|HR analytics differs from HRMIS as it can connect HR decisions with ___|Organization performance|Employee satisfaction scores only|Regulatory compliance|Payroll structures
+1|Why must a good metric state what it does NOT include?|Clarity; prevents misinterpretation of calculations|Visual appeal in dashboards|Alignment with competitor benchmarks|Only positive outcomes get reported
+1|Track all possible metrics, even unused, to build data history.|False|True
+1|Three elements of a good HR problem definition|What, why, desired state or outcome|Who, when, budget estimate|Problem, timeline, team assignment|Cost-benefit, risk assessment, expected output
+1|The overconfidence trap prevents people from ___|Questioning methods, motivation and how they communicate findings|Using advanced statistical tools|Collaborating with HR business partners|Collecting enough sample data
+1|The 'overfitting trap' is|Model does well on training data but poorly on new data|Too few variables|Collecting more data than needed|Too many chart types
+1|Data owners, technology owners and SMEs are|Stakeholders depended upon|Stakeholders served|Stakeholders impacted|Stakeholders managed
+1|'Business Acumen' components|Financial literacy, political astuteness, internal awareness, external awareness|Data awareness, statistics, visualization, writing|Problem definition, project, change, stakeholder management|HR sub-functions, interdependencies, privacy, ethics
+1|KPIs and HR metrics|HR metrics are broader; every KPI is a metric|Completely unrelated|KPIs replace HR metrics|Metrics only for recruitment
+2|Which is NOT a step of Data Analytics?|Data Encryption|Data Collection|Data Visualization|Findings
+2|A data visualization tool|Power BI|Photoshop|AutoCAD|MATLAB
+2|Quickly summarize average work experience in raw Excel|Pivot Table|Data Studio|Recommended Pivot Tables|Conditional Formatting
+2|Visual breakdown of UG, PG, PhD applicants|Pivot Chart|Pivot Table|SN field|Status of interview field
+2|Where to drag "City" to get counts per city as rows|Rows area|Values area|Filters area|Columns area
+2|Recommended Pivot Tables need you to drag every field manually.|False|True
+2|Which visualization tool is a coding/statistical language?|R|Tableau|Data Studio|Power-BI
+2|Field used to answer "How many are UG, PG, PhD?"|Education|Work Experience|Department|Status of interview
+2|Turn a Pivot Table into a chart via|PivotTable Analyze/Design → PivotChart|Formulas → Insert Chart|Review → Chart Tools|Page Layout → Visualize
+2|A text/ID field in Values defaults to|Count|Sum|Product|Average
+3|Poor employer branding hurts sourcing. Which constraint?|Poor image|Limited budget|Government policy|Conservative internal policies
+3|Correct source–category pair|Promotions and transfer: Internal|Job bidding: External|Employee referrals: External|Educational institutions: Internal
+3|Close gender/ethnic gaps in senior management|Diverse partner orgs, mentorship, bias training|Higher salaries, remote work|Lower qualifications, internal promotions only|Outsource to agencies
+3|Attract non-traditional candidates in 'Identifying HR Requirements'|Inclusive language, less jargon, flexible work in job descriptions|Ads only on LinkedIn and Naukri|Require CISSP and CISM|Formal degrees only
+3|Removing names and identifiers from resumes is ___ recruitment|Blind|Panel-based|Competency-based|Structured
+3|'Hire for attitude, train for skill' mainly evaluates technical expertise over values.|False|True
+3|High time-to-hire and unknown best channel: best tools|ATS + job boards + CRM|Spreadsheets + periodic reviews|More paid postings + monthly audits|Helpdesk + Excel training
+3|6-month surge plus source evaluation|Temporary employees; yield ratios|Employee leasing; surveys|Subcontracting; process flowchart|Outsourcing; time-lapse data
+3|LinkedIn's primary external hiring focus was active job seekers.|False|True
+3|Cut 60-day time-to-hire for engineers|AI screening + self-service interview scheduling|More recruiters + walk-ins|Fewer rounds + higher salaries|University partnerships + campus drives
+4|Yes to "like to work here", No to "plan to apply": stage|Consideration|Awareness only|Preference|No interest
+4|'Praises' data from Best Place to Work employees shows|Why people come and stay|Why employees leave|External vs internal hiring cost|Career page views
+4|Internal Branding Matrix mainly uses salary benchmarking and compensation revision.|False|True
+4|Surface vs Deep Diversity|Surface: gender, religion, city, education. Deep: attitude, belief, values, motivation|Surface: attitude, belief. Deep: gender, religion|Happiness Index vs Knowledge Sharing Index|Internal hires vs external hires
+4|Post-hire metrics showing the right people were recruited|Quality of hire and early attrition|Regret rate, application-to-offer ratio|Applications received, cost per application|Candidate experience, job search intensity
+4|Source effectiveness is judged only by relevant applications, ignoring cost.|False|True
+4|Best practice for developing the pool|Large pool of internal and external candidates; consult employees|External candidates only|Generic competency models|Hire only when a vacancy arises
+4|Correct interview type–definition match|Behavioural: actual work incidents, what the applicant did|Situational: questions as they come to mind|Structured: predetermined job-related questions|Panel: hypothetical incident
+4|High early attrition, halo-effect ratings, skipped Audit and Review|Train on Halo Effect, track early attrition, institutionalize Audit and Review|Written aptitude tests only|Expand the pool only|Medical and reference checks only
+4|Ability of a tool to measure consistently (repeat scores ≈ same)|Reliability|Validity|Standardisation|Suitability
+5|"Effectiveness of Selection Method" table assesses|Person-job fit, performance rating, cost|Resume quality|Communication skills|Training effectiveness
+5|Metric for recruitment efficiency|Yield ratio|Absenteeism|Diversity index|Attrition rate
+5|Source meeting most high-level role expectations|Employee Referrals|Consultants|Job Portal|Campus hiring
+5|Ideal trait of an effective selection test|Predictive of job performance|Ease of administration|Low drop rate|High salary correlation
+5|How accurately selection analytics predicts performance|Actual vs predicted performance|Number of rounds|Manager intuition|Interview duration
+5|"Cost per Joinee" considers|Total recruitment expenditure and number of joinees|Manager rating|Interview duration|Salary band only
+5|A "false negative" in selection|A successful candidate is not hired|An unsuccessful candidate is hired|An unsuccessful candidate is not hired|A successful candidate is hired
+5|An inappropriate cut score causes|More false positives or false negatives|Higher salaries|Lower cost per hire|Perfect performance
+5|"Fit Percentage" indicates|Alignment among job, team, supervisor, organization|Resume match rate|Candidates per recruiter|Salary satisfaction
+5|Best data to spot hiring bias|Gender-wise hiring ratio|Cost per joinee|Average interview questions|Tenure by marital status
+6|Who should be trained first?|Those with motivation to learn|Education level|Salary level|Age
+6|Skill inventory analysis compares|Available vs required skills|Budget vs outcomes|Age vs performance|Training vs education
+6|Phase measuring training outcomes|Evaluation|Assessment|Implementation|Alignment
+6|Training coverage|Employees trained / total employees|Training budget|Department size|HR ratio
+6|Training (vs development) aims at|Current job preparation|Career enhancement|Employee motivation|Strategic planning
+6|Training absenteeism formula|Employees absent / total training participants|Total training time / absent|Present / total employees|Trained / absent
+6|Importance dimension in task analysis|Criticality of the task|Age|Training length|Training method
+6|Who typically initiates training?|Management|Employees|External trainers|Government
+6|"Cost per learning hour received" assesses|Cost efficiency|Learning outcomes|Staff engagement|Department needs
+6|Teamwork skill level in inventory analysis|Performance rating|Training hours|Seniority|Department revenue
+7|Coaching is most effective when|There is an open relationship|Supervisors uninvolved|Trainees left alone|Feedback avoided
+7|Understudy training|Acting as temporary substitute for a manager|Lecturing executives|Replacing peers unguided|Random job hopping
+7|Exposure to diverse functions via advisory groups|Multiple management|Understudy|Job rotation|Case study
+7|Developing reasoning skills|Case study|Role playing|Business games|Sensitivity training
+7|Executive gains cross-functional experience via|Job rotation|Role play|Coaching|Special readings
+7|Traditional practices are shifting toward|Participation-based development|Eliminating training|Fixed-role models|Manager-exclusive development
+7|A suggested future HR role|Preserve and increase organizational knowledge|Control salaries only|Isolate departments|Promote top-down learning only
+7|Important learning metric|Attitude change|Holidays taken|Dress code adoption|Marketing redesign
+7|Employee reaction to training may include|Satisfaction with course delivery|Ignoring content|Dismissing instructors|Refusing appraisals
+7|Training evaluation criteria do NOT include|Sales promotions|Learning|Employee reactions|Business results
+8|Training effectiveness chart visualizes|Subject-wise performance|Weather patterns|Departmental shifts|Meal preferences
+8|Financial metric tracked department-wise|Training Cost|Bonus expenditure|Rent allocation|Reimbursement rate
+8|Duration metric in training visualization|Department-wise Training Duration|Employee retention|Vacation time|Resignation period
+8|Trait in the benchmark skills table|Compassion and sensitivity|Punctuality|Typing speed|Accent clarity
+8|Development summary component from self and others' input|Listens to others|Leave balance|Health insurance|Seating layout
+8|Interpersonal relationship development includes|Facilitates team success|Conflict creation|Attendance reporting|Wage compliance
+8|Internal development program activity|Job rotation|External consulting|Legal compliance|Budget proposal writing
+8|Job experiences matrix: decisions under stress|Adverse business conditions|Group exercise|Party planning|Time logging
+8|\"Making Transitions\" signifies|Unfamiliar responsibilities|Time zone shift|Changing passwords|Location mapping
+8|Element supporting culture development|Feedback mechanism|Leave policy|Snack availability|Commute distance
+9|Performance appraisal is primarily|Evaluating work behavior and potential|Monitoring finances|Expanding customers|Managing tech infrastructure
+9|Performance management differs from appraisal as it|Includes evaluation, improvement, rewards|Focuses only on salary revisions|Is only annual reporting|Excludes development
+9|After measuring performance, compare results with ___|Standards|Compensation plans|Labor unions|Inventories
+9|Multiple-person evaluation method|Paired comparison|Essay evaluation|Critical incidents|Checklist method
+9|Method using behavioural examples as anchors for levels|BARS|KRA|MBO|HRA
+9|360-degree appraisal mainly provides|Confidential anonymous feedback|Tax records|Product estimates|Inventory statistics
+9|If innovation is the objective, standards include|New ideas and implemented projects|Administrative hierarchy|Attendance frequency|Warehouse movement
+9|InnovateTech included cross-functional ___ in standards|Training|Outsourcing|Auditing|Marketing
+9|Quantitative criteria: sales figures and project completion ___|Times|Behaviors|Policies|Attitudes
+9|Intentional rating distortion means|Deliberate manipulation of ratings|Calculation errors|Communication failures|Audit inconsistencies
+10|Return on equity in the balanced scorecard|Lag indicator|Behavioral indicator|Recruitment indicator|Training indicator
+10|9 Box Matrix evaluates potential rating and|Performance rating|Compensation ratio|Training frequency|Attendance score
+10|On-time delivery was a lead indicator for customers.|True|False
+10|Defect rate and unit product cost fall under|Internal business processes|External customer relations|Workforce engagement|Strategic compensation
+10|Motivation, ability, opportunity identify|Causes of underperformance|Compensation structures|Recruitment procedures|Succession plans
+10|Variable pay: bonuses, incentives, stock ___|Option|Exchange|Allocation|Planning
+10|A non-financial reward|Family picnic|Retirement pension|Performance bonus|Stock option
+10|Skills Gap Analysis compares current skills with|Future organizational needs|Transportation requirements|Inventory classes|Tax rules
+10|DEI = Diversity, Equity, and|Inclusion|Integrity|Investment|Innovation
+10|Compensation philosophy mainly defines|Employee value proposition|Transport infrastructure|Tax reporting|Warehouse planning
+11|Pay mix: base wage, benefits, and|Long-term incentives|Transport allowance|Tax credits|Inventory rewards
+11|Job evaluation points are linked with compensation and benefits amounts.|True|False
+11|Compensation matrices align pay with|Job worth and evaluation points|Warehouse efficiency|Tax compliance|Transport scheduling
+11|Pay increase impact compared old employees with|New employees|Contractual workers|Consultants|Interns
+11|Quartile-wise salary analysis identifies|Pay-gap patterns|Supply chain gaps|Transport inefficiencies|Inventory shortages
+11|Benefit analysis: retirement plans and|Wellness programs|Transport insurance|Tax assistance|Warehouse maintenance
+11|Attendance was a criterion for ___ incentive plans|Individual|Departmental|Regional|Operational
+11|Companywide incentives: operational efficiency and|Employee stock earnings|Transport expenses|Office maintenance|Inventory movement
+11|Compa Ratio uses pay rate and|Pay range midpoint|Annual tax rate|Transport allowance|Inventory value
+11|Hiring management trainees builds a talent ___|Pipeline|Network|Matrix|Database
+12|Role of Tableau in HR Analytics|Converts data into visual analytical insights|Stores employee records|Manages communication|Develops websites
+12|Tableau works with different types of data sources.|True|False
+12|Best for comparing values across departments|Bar Chart|Scatter Plot|Text Document|Data Table
+12|Average joining delay across employees is|Data aggregation|Data connection|Data extraction|Data formatting
+12|Why Tableau suits complex datasets|Interactive visual exploration|Fixed reporting structure|Manual data entry|Static documents
+12|Multidimensional analysis|Comparing data across several dimensions|One variable in isolation|One record at a time|A single fixed view
+12|A Tableau worksheet is|An individual analytical view of data|Connected data sources|Multiple dashboards|Record storage
+12|Benefit of visualizing aggregated HR data|Patterns and comparisons are easier to interpret|More records|No need for source data|Blocks exploration
+12|Purpose of a calculated field|Create a new variable from existing data|Delete variables|Replace the data source|Convert variables to graphics
+12|Tableau function for date difference|DATEDIFF|DATEADD|DATENAME|DATEPART`;
+
+    // Discrepancy & pedagogical notes mapped by question index
+    const NOTES_MAP = {
+      37: "Note: Option (Structured) specifies predetermined job-related questions. However, the official NPTEL answer key marks 'Behavioural' (actual work incidents).",
+      108: "Note: The NPTEL answer sheet erroneously marks 'annual tax rate', but Compa Ratio is formally defined in compensation analytics as Current Pay / Pay Range Midpoint."
+    };
+
+    // Parse question records
+    const QUESTIONS = RAW_DATA.trim().split('\n').map((line, idx) => {
+      const parts = line.split('|');
+      return {
+        id: idx,
+        week: parseInt(parts[0], 10),
+        question: parts[1],
+        correct: parts[2],
+        options: parts.slice(2),
+        weekQNum: 0
+      };
+    });
+
+    // Assign per-week question numbers (1 to 10)
+    const weekCounters = {};
+    QUESTIONS.forEach(q => {
+      weekCounters[q.week] = (weekCounters[q.week] || 0) + 1;
+      q.weekQNum = weekCounters[q.week];
+    });
+
+    // PRNG for deterministic, reproducible shuffling with seeds
+    function createRng(seed) {
+      let a = seed | 0;
+      return function() {
+        a = (a + 0x6D2B79F5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    function shuffleArray(arr, seed) {
+      const result = arr.slice();
+      const rng = createRng(seed);
+      for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+      }
+      return result;
+    }
+
+    // Application State Management
+    const STORAGE_KEY = 'hra_v2';
+    const DEFAULT_STATE = {
+      seed: Math.floor(Math.random() * 1000000) + 1,
+      answers: {},        // { [qId]: selectedOptionText }
+      starred: {},        // { [qId]: true }
+      shuffleQ: false,
+      shuffleOpts: true,
+      weekFilter: 0,      // 0 = All, 1..12
+      statusFilter: 'all',// 'all' | 'unanswered' | 'incorrect' | 'starred'
+      searchQuery: '',
+      soundEnabled: true,
+      theme: 'dark'
+    };
+
+    let state = { ...DEFAULT_STATE };
+
+    // Migrate from legacy 'hra' localStorage key if present
+    try {
+      const legacy = localStorage.getItem('hra');
+      if (legacy) {
+        const parsedLegacy = JSON.parse(legacy);
+        if (parsedLegacy.a) state.answers = parsedLegacy.a;
+        if (parsedLegacy.sh) state.shuffleQ = !!parsedLegacy.sh;
+        if (parsedLegacy.seed) state.seed = parsedLegacy.seed;
+      }
+    } catch (e) {
+      console.warn('Error reading legacy storage:', e);
+    }
+
+    // Load active state
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        state = Object.assign(state, JSON.parse(saved));
+      }
+    } catch (e) {
+      console.warn('Error loading state:', e);
+    }
+
+    function persistState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        console.error('Failed to save state to localStorage', e);
+      }
+    }
+
+    // Web Audio Synthesizer (Zero Dependencies)
+    let audioCtx = null;
+    function playAudio(isCorrect) {
+      if (!state.soundEnabled) return;
+      try {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) audioCtx = new AudioContext();
+        }
+        if (!audioCtx) return;
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        const now = audioCtx.currentTime;
+        if (isCorrect) {
+          // Cheerful two-tone ascending chime
+          const osc1 = audioCtx.createOscillator();
+          const osc2 = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          
+          osc1.type = 'sine';
+          osc1.frequency.setValueAtTime(523.25, now); // C5
+          osc1.frequency.exponentialRampToValueAtTime(659.25, now + 0.1); // E5
+
+          osc2.type = 'triangle';
+          osc2.frequency.setValueAtTime(1046.5, now + 0.08); // C6
+
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+          osc1.connect(gain);
+          osc2.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          osc1.start(now);
+          osc2.start(now + 0.08);
+          osc1.stop(now + 0.35);
+          osc2.stop(now + 0.35);
+        } else {
+          // Soft descending muted double-tap
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(240, now);
+          osc.frequency.exponentialRampToValueAtTime(160, now + 0.2);
+
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          osc.start(now);
+          osc.stop(now + 0.22);
+        }
+      } catch (err) {
+        // Audio policy or silent failure
+      }
+    }
+
+    // Toast helper
+    let toastTimer = null;
+    function showToast(msg) {
+      const el = document.getElementById('toastNotification');
+      el.textContent = msg;
+      el.classList.add('visible');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        el.classList.remove('visible');
+      }, 2400);
+    }
+
+    // Escape HTML helper
+    function escapeHtml(str) {
+      return (str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // Highlight search matches
+    function highlightMatch(text, query) {
+      const safeText = escapeHtml(text);
+      if (!query || !query.trim()) return safeText;
+      const clean = query.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`(${clean})`, 'gi');
+      return safeText.replace(regex, '<mark>$1</mark>');
+    }
+
+    // ==========================================================================
+    // Render Functions
+    // ==========================================================================
+
+    function renderDashboard() {
+      const totalQ = QUESTIONS.length;
+      const answeredKeys = Object.keys(state.answers);
+      const attemptedCount = answeredKeys.length;
+      const correctCount = QUESTIONS.filter(q => state.answers[q.id] === q.correct).length;
+      const accuracy = attemptedCount > 0 ? Math.round((correctCount / attemptedCount) * 100) : 0;
+      const mastery = Math.round((correctCount / totalQ) * 100);
+      const starredCount = Object.keys(state.starred).filter(k => state.starred[k]).length;
+
+      // Stats
+      document.getElementById('statAttempted').textContent = `${attemptedCount} / ${totalQ}`;
+      document.getElementById('statCorrect').textContent = correctCount;
+      document.getElementById('statAccuracy').textContent = `${accuracy}%`;
+      document.getElementById('statStarred').textContent = starredCount;
+
+      // Gauge Circular Fill (circumference = 2 * PI * 45 ≈ 282.74)
+      const circumference = 282.74;
+      const offset = circumference - (mastery / 100) * circumference;
+      const gaugeRing = document.getElementById('gaugeRing');
+      gaugeRing.style.strokeDashoffset = offset;
+      document.getElementById('gaugePercent').textContent = `${mastery}%`;
+      document.getElementById('masterySubtext').textContent = `${correctCount} of ${totalQ} mastered`;
+
+      // Filter Badges
+      const mistakesCount = QUESTIONS.filter(q => (q.id in state.answers) && state.answers[q.id] !== q.correct).length;
+      const unansweredCount = totalQ - attemptedCount;
+
+      document.getElementById('badgeAll').textContent = totalQ;
+      document.getElementById('badgeUnanswered').textContent = unansweredCount;
+      document.getElementById('badgeIncorrect').textContent = mistakesCount;
+      document.getElementById('badgeStarred').textContent = starredCount;
+    }
+
+    function renderWeekNavBar() {
+      const container = document.getElementById('weekNavBar');
+      const weeks = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+      
+      container.innerHTML = weeks.map(w => {
+        const isAll = w === 0;
+        const isActive = state.weekFilter === w;
+        
+        let isMastered = false;
+        if (!isAll) {
+          const weekQs = QUESTIONS.filter(q => q.week === w);
+          const weekCorrect = weekQs.filter(q => state.answers[q.id] === q.correct).length;
+          isMastered = weekCorrect === weekQs.length;
+        }
+
+        const label = isAll ? 'All Weeks' : `Week ${w}`;
+        return `
+          <button class="week-pill ${isActive ? 'active' : ''} ${isMastered ? 'mastered' : ''}" data-week="${w}" role="tab" aria-selected="${isActive}">
+            <span class="dot" title="Week fully mastered!"></span>
+            ${label}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function getFilteredQuestions() {
+      let list = QUESTIONS.slice();
+
+      // Week filter
+      if (state.weekFilter > 0) {
+        list = list.filter(q => q.week === state.weekFilter);
+      }
+
+      // Status filter
+      if (state.statusFilter === 'unanswered') {
+        list = list.filter(q => !(q.id in state.answers));
+      } else if (state.statusFilter === 'incorrect') {
+        list = list.filter(q => (q.id in state.answers) && state.answers[q.id] !== q.correct);
+      } else if (state.statusFilter === 'starred') {
+        list = list.filter(q => !!state.starred[q.id]);
+      }
+
+      // Search keyword filter
+      const qText = (state.searchQuery || '').trim().toLowerCase();
+      if (qText) {
+        list = list.filter(q => {
+          return q.question.toLowerCase().includes(qText) ||
+                 q.options.some(o => o.toLowerCase().includes(qText)) ||
+                 `week ${q.week}`.includes(qText);
+        });
+      }
+
+      // Shuffle question order if enabled
+      if (state.shuffleQ) {
+        list = shuffleArray(list, state.seed);
+      }
+
+      return list;
+    }
+
+    function renderQuestionsList() {
+      const list = getFilteredQuestions();
+      const container = document.getElementById('questionsStream');
+      const summaryText = document.getElementById('resultsSummaryText');
+
+      summaryText.textContent = `Showing ${list.length} question${list.length === 1 ? '' : 's'}`;
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <h3>No questions found</h3>
+            <p>Try switching to "All Weeks" or changing your filter criteria.</p>
+            <button class="chip-btn active" onclick="resetFilters()">View All Questions</button>
+          </div>
+        `;
+        return;
+      }
+
+      const letters = ['A', 'B', 'C', 'D'];
+
+      container.innerHTML = list.map(q => {
+        const userAnswer = state.answers[q.id];
+        const isAnswered = userAnswer !== undefined;
+        const isCorrect = isAnswered && userAnswer === q.correct;
+        const isIncorrect = isAnswered && !isCorrect;
+        const isStarred = !!state.starred[q.id];
+
+        let statusClass = '';
+        if (isCorrect) statusClass = 'status-correct';
+        else if (isIncorrect) statusClass = 'status-incorrect';
+
+        // Options order (shuffled per question seed or default)
+        const opts = state.shuffleOpts ? shuffleArray(q.options, state.seed * 1000 + q.id) : q.options;
+
+        const optionsHtml = opts.map((opt, i) => {
+          const letter = letters[i] || (i + 1);
+          let optClass = '';
+          if (isAnswered) {
+            if (opt === q.correct) {
+              optClass = isCorrect ? 'is-correct' : 'reveal-correct';
+            } else if (opt === userAnswer) {
+              optClass = 'is-incorrect';
+            }
+          }
+
+          const escapedOpt = escapeHtml(opt);
+          const safeDataAttr = opt.replace(/"/g, '&quot;');
+
+          return `
+            <button 
+              class="opt-btn ${optClass}" 
+              data-qid="${q.id}" 
+              data-opt="${safeDataAttr}"
+              data-idx="${i}"
+              ${isAnswered ? 'disabled' : ''}
+              aria-label="Option ${letter}: ${escapedOpt}"
+            >
+              <span class="opt-letter">${letter}</span>
+              <span class="opt-text">${highlightMatch(opt, state.searchQuery)}</span>
+              <span class="opt-key-hint" aria-hidden="true">${i + 1}</span>
+            </button>
+          `;
+        }).join('');
+
+        // Card Feedback Area
+        let feedbackHtml = '';
+        if (isAnswered) {
+          const noteText = NOTES_MAP[q.id];
+          const noteHtml = noteText ? `<div class="explanation-callout"><strong>Examination Clarification:</strong> ${escapeHtml(noteText)}</div>` : '';
+
+          if (isCorrect) {
+            feedbackHtml = `
+              <div class="feedback-box is-correct">
+                <div class="feedback-content">
+                  <div class="feedback-main">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Correct!
+                  </div>
+                  <div class="feedback-sub">Your selection matches the official answer key.</div>
+                  ${noteHtml}
+                </div>
+                <button class="btn-retry" data-retry="${q.id}" title="Clear answer and try again">Retry</button>
+              </div>
+            `;
+          } else {
+            feedbackHtml = `
+              <div class="feedback-box is-incorrect">
+                <div class="feedback-content">
+                  <div class="feedback-main">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    Not quite
+                  </div>
+                  <div class="feedback-sub">Correct answer: <strong>${escapeHtml(q.correct)}</strong></div>
+                  ${noteHtml}
+                </div>
+                <button class="btn-retry" data-retry="${q.id}" title="Clear answer and try again">Retry</button>
+              </div>
+            `;
+          }
+        }
+
+        return `
+          <article class="q-card ${statusClass}" id="q${q.id}" data-qid="${q.id}" tabindex="0">
+            <header class="q-head">
+              <div class="q-tags">
+                <span class="tag-week">WEEK ${q.week}</span>
+                <span class="tag-num">Question ${q.weekQNum} of 10</span>
+              </div>
+              <button class="star-btn ${isStarred ? 'starred' : ''}" data-star="${q.id}" title="${isStarred ? 'Remove Star' : 'Star this question'}" aria-label="Bookmark question">
+                <svg viewBox="0 0 24 24" fill="${isStarred ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </button>
+            </header>
+
+            <div class="q-prompt">${highlightMatch(q.question, state.searchQuery)}</div>
+            <div class="options-grid">${optionsHtml}</div>
+            ${feedbackHtml}
+          </article>
+        `;
+      }).join('');
+    }
+
+    function renderAll() {
+      // Apply theme attribute
+      document.documentElement.setAttribute('data-theme', state.theme);
+      document.getElementById('themeIconDark').style.display = state.theme === 'light' ? 'none' : 'block';
+      document.getElementById('themeIconLight').style.display = state.theme === 'light' ? 'block' : 'none';
+
+      // Sound Icon
+      document.getElementById('audioIconOn').style.display = state.soundEnabled ? 'block' : 'none';
+      document.getElementById('audioIconOff').style.display = state.soundEnabled ? 'none' : 'block';
+
+      // Controls
+      document.getElementById('shuffleToggle').checked = !!state.shuffleQ;
+      document.getElementById('shuffleOptsToggle').checked = !!state.shuffleOpts;
+
+      // Filter chips active state
+      document.querySelectorAll('.filter-chips .chip-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === state.statusFilter);
+      });
+
+      renderDashboard();
+      renderWeekNavBar();
+      renderQuestionsList();
+    }
+
+    // Scroll to next unanswered question smartly
+    function scrollToNextUnanswered() {
+      const filtered = getFilteredQuestions();
+      const unanswered = filtered.filter(q => !(q.id in state.answers));
+
+      if (unanswered.length === 0) {
+        showToast('All visible questions are answered! 🎉');
+        return;
+      }
+
+      // Find question closest below current scroll position
+      const scrollY = window.scrollY;
+      let targetQ = null;
+      for (const q of unanswered) {
+        const el = document.getElementById('q' + q.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top > 220) {
+            targetQ = q;
+            break;
+          }
+        }
+      }
+
+      // If none found below, wrap around to first unanswered
+      if (!targetQ) {
+        targetQ = unanswered[0];
+      }
+
+      const targetEl = document.getElementById('q' + targetQ.id);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        targetEl.classList.add('focused');
+        targetEl.focus();
+        setTimeout(() => targetEl.classList.remove('focused'), 1600);
+      }
+    }
+
+    function resetFilters() {
+      state.weekFilter = 0;
+      state.statusFilter = 'all';
+      state.searchQuery = '';
+      document.getElementById('searchInput').value = '';
+      document.getElementById('searchClearBtn').classList.remove('active');
+      persistState();
+      renderAll();
+    }
+
+    // ==========================================================================
+    // Event Listeners
+    // ==========================================================================
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderAll();
+
+      // Click delegations
+      document.addEventListener('click', (e) => {
+        // Option selection
+        const optBtn = e.target.closest('.opt-btn');
+        if (optBtn && !optBtn.disabled) {
+          const qId = parseInt(optBtn.dataset.qid, 10);
+          const chosenOpt = optBtn.dataset.opt;
+          const question = QUESTIONS[qId];
+
+          state.answers[qId] = chosenOpt;
+          const isCorrect = chosenOpt === question.correct;
+          playAudio(isCorrect);
+
+          persistState();
+          renderDashboard();
+          renderWeekNavBar();
+          renderQuestionsList();
+          return;
+        }
+
+        // Retry single question
+        const retryBtn = e.target.closest('[data-retry]');
+        if (retryBtn) {
+          const qId = parseInt(retryBtn.dataset.retry, 10);
+          delete state.answers[qId];
+          persistState();
+          renderDashboard();
+          renderWeekNavBar();
+          renderQuestionsList();
+          return;
+        }
+
+        // Star / bookmark toggle
+        const starBtn = e.target.closest('[data-star]');
+        if (starBtn) {
+          const qId = parseInt(starBtn.dataset.star, 10);
+          state.starred[qId] = !state.starred[qId];
+          persistState();
+          renderDashboard();
+          renderQuestionsList();
+          showToast(state.starred[qId] ? 'Question added to Starred ⭐' : 'Question unstarred');
+          return;
+        }
+
+        // Week navigation pill
+        const weekPill = e.target.closest('.week-pill');
+        if (weekPill) {
+          state.weekFilter = parseInt(weekPill.dataset.week, 10);
+          persistState();
+          renderWeekNavBar();
+          renderQuestionsList();
+          return;
+        }
+
+        // Filter chips
+        const chipBtn = e.target.closest('.chip-btn');
+        if (chipBtn && chipBtn.dataset.filter) {
+          state.statusFilter = chipBtn.dataset.filter;
+          persistState();
+          document.querySelectorAll('.filter-chips .chip-btn').forEach(b => b.classList.toggle('active', b === chipBtn));
+          renderQuestionsList();
+          return;
+        }
+      });
+
+      // Search input handler
+      const searchInput = document.getElementById('searchInput');
+      const searchClearBtn = document.getElementById('searchClearBtn');
+      let searchTimeout = null;
+
+      searchInput.addEventListener('input', (e) => {
+        const val = e.target.value;
+        searchClearBtn.classList.toggle('active', val.length > 0);
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+          state.searchQuery = val;
+          renderQuestionsList();
+        }, 150);
+      });
+
+      searchClearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        state.searchQuery = '';
+        searchClearBtn.classList.remove('active');
+        searchInput.focus();
+        renderQuestionsList();
+      });
+
+      // Shuffles
+      document.getElementById('shuffleToggle').addEventListener('change', (e) => {
+        state.shuffleQ = e.target.checked;
+        persistState();
+        renderQuestionsList();
+      });
+
+      document.getElementById('shuffleOptsToggle').addEventListener('change', (e) => {
+        state.shuffleOpts = e.target.checked;
+        persistState();
+        renderQuestionsList();
+      });
+
+      // Next Unanswered Buttons
+      document.getElementById('nextUnansweredBtn').addEventListener('click', scrollToNextUnanswered);
+      document.getElementById('fabNextUnanswered').addEventListener('click', scrollToNextUnanswered);
+
+      // Scroll to Top FAB
+      document.getElementById('fabScrollTop').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Sound Toggle
+      document.getElementById('audioToggleBtn').addEventListener('click', () => {
+        state.soundEnabled = !state.soundEnabled;
+        persistState();
+        document.getElementById('audioIconOn').style.display = state.soundEnabled ? 'block' : 'none';
+        document.getElementById('audioIconOff').style.display = state.soundEnabled ? 'none' : 'block';
+        showToast(state.soundEnabled ? 'Sound effects enabled 🔊' : 'Sound effects muted 🔇');
+      });
+
+      // Theme Toggle
+      document.getElementById('themeToggleBtn').addEventListener('click', () => {
+        state.theme = state.theme === 'dark' ? 'light' : 'dark';
+        persistState();
+        document.documentElement.setAttribute('data-theme', state.theme);
+        document.getElementById('themeIconDark').style.display = state.theme === 'light' ? 'none' : 'block';
+        document.getElementById('themeIconLight').style.display = state.theme === 'light' ? 'block' : 'none';
+      });
+
+      // Shortcuts Modal
+      document.getElementById('shortcutsBtn').addEventListener('click', () => {
+        document.getElementById('shortcutsDialog').showModal();
+      });
+
+      // Reset Modal Trigger
+      document.getElementById('resetModalTrigger').addEventListener('click', () => {
+        document.getElementById('resetConfirmDialog').showModal();
+      });
+
+      // Confirm Reset Progress
+      document.getElementById('confirmResetBtn').addEventListener('click', () => {
+        const alsoClearStarred = document.getElementById('clearStarredCheckbox').checked;
+        state.answers = {};
+        if (alsoClearStarred) state.starred = {};
+        state.seed = Math.floor(Math.random() * 1000000) + 1;
+        state.weekFilter = 0;
+        state.statusFilter = 'all';
+        persistState();
+        document.getElementById('resetConfirmDialog').close();
+        renderAll();
+        showToast('Progress cleared and reshuffled!');
+      });
+
+      // Share / Copy Progress
+      document.getElementById('shareBtn').addEventListener('click', () => {
+        const totalQ = QUESTIONS.length;
+        const attempted = Object.keys(state.answers).length;
+        const correct = QUESTIONS.filter(q => state.answers[q.id] === q.correct).length;
+        const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+        const text = `🎯 NPTEL HR Analytics Drill (IIT Roorkee):\nProgress: ${attempted}/${totalQ} attempted · ${correct} Correct (${accuracy}% Accuracy)\nDrill app: ${window.location.href}`;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            showToast('Progress summary copied to clipboard! 📋');
+          }).catch(() => {
+            prompt('Copy summary:', text);
+          });
+        } else {
+          prompt('Copy summary:', text);
+        }
+      });
+
+      // Keyboard Accessibility
+      document.addEventListener('keydown', (e) => {
+        // Ignore key shortcuts if user is typing in search input
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+          if (e.key === 'Escape') {
+            searchInput.blur();
+          }
+          return;
+        }
+
+        // Close open dialogs on Escape
+        if (e.key === 'Escape') {
+          const dialogs = document.querySelectorAll('dialog[open]');
+          dialogs.forEach(d => d.close());
+          return;
+        }
+
+        // Focus search bar on '/'
+        if (e.key === '/') {
+          e.preventDefault();
+          searchInput.focus();
+          return;
+        }
+
+        // Open shortcuts on '?'
+        if (e.key === '?' && !e.shiftKey) {
+          e.preventDefault();
+          document.getElementById('shortcutsDialog').showModal();
+          return;
+        }
+
+        // Jump next unanswered on 'n' or 'j'
+        if (e.key === 'n' || e.key === 'j' || e.key === 'N' || e.key === 'J') {
+          e.preventDefault();
+          scrollToNextUnanswered();
+          return;
+        }
+
+        // Options 1, 2, 3, 4 selection on active / focused card
+        if (['1', '2', '3', '4'].includes(e.key)) {
+          const activeCard = document.activeElement ? document.activeElement.closest('.q-card') : null;
+          if (activeCard) {
+            const optIdx = parseInt(e.key, 10) - 1;
+            const optBtns = activeCard.querySelectorAll('.opt-btn');
+            if (optBtns[optIdx] && !optBtns[optIdx].disabled) {
+              e.preventDefault();
+              optBtns[optIdx].click();
+            }
+          }
+        }
+
+        // Toggle Star on active card with 's'
+        if (e.key === 's' || e.key === 'S') {
+          const activeCard = document.activeElement ? document.activeElement.closest('.q-card') : null;
+          if (activeCard) {
+            const starBtn = activeCard.querySelector('.star-btn');
+            if (starBtn) {
+              e.preventDefault();
+              starBtn.click();
+            }
+          }
+        }
+      });
+    });
+
+    // PWA Service Worker Registration
+    if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(err => {
+          console.warn('Service worker registration note:', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

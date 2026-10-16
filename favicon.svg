@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="50%" stop-color="#7c3aed" />
+      <stop offset="100%" stop-color="#b4432a" />
+    </linearGradient>
+    <linearGradient id="bar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e0e7ff" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#g)" />
+  <!-- Graduation cap tassel accent -->
+  <path d="M32 14 L50 21 L32 28 L14 21 Z" fill="#ffffff" opacity="0.95" />
+  <path d="M48 23 V33 C48 35 46 36 45 36 C44 36 42 35 42 33 V25.5" stroke="#fcd34d" stroke-width="2" fill="none" stroke-linecap="round" />
+  <!-- Analytics bars inside cap -->
+  <rect x="22" y="36" width="5" height="14" rx="2" fill="url(#bar)" />
+  <rect x="30" y="30" width="5" height="20" rx="2" fill="url(#bar)" />
+  <rect x="38" y="24" width="5" height="26" rx="2" fill="url(#bar)" />
+</svg>
