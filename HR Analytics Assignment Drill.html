@@ -1254,153 +1254,1556 @@
        Application Data & Logic
        ========================================================================== -->
   <script>
-    // 120 Verified Questions from NPTEL HR Analytics (IIT Roorkee, Weeks 1 to 12)
-    const RAW_DATA = `1|Which is NOT a descriptive analytics tool in HR?|Decision trees and random forests|Mean and standard deviation|Counts and ratios|Mode and median
-1|HR analytics differs from HRMIS as it can connect HR decisions with ___|Organization performance|Employee satisfaction scores only|Regulatory compliance|Payroll structures
-1|Why must a good metric state what it does NOT include?|Clarity; prevents misinterpretation of calculations|Visual appeal in dashboards|Alignment with competitor benchmarks|Only positive outcomes get reported
-1|Track all possible metrics, even unused, to build data history.|False|True
-1|Three elements of a good HR problem definition|What, why, desired state or outcome|Who, when, budget estimate|Problem, timeline, team assignment|Cost-benefit, risk assessment, expected output
-1|The overconfidence trap prevents people from ___|Questioning methods, motivation and how they communicate findings|Using advanced statistical tools|Collaborating with HR business partners|Collecting enough sample data
-1|The 'overfitting trap' is|Model does well on training data but poorly on new data|Too few variables|Collecting more data than needed|Too many chart types
-1|Data owners, technology owners and SMEs are|Stakeholders depended upon|Stakeholders served|Stakeholders impacted|Stakeholders managed
-1|'Business Acumen' components|Financial literacy, political astuteness, internal awareness, external awareness|Data awareness, statistics, visualization, writing|Problem definition, project, change, stakeholder management|HR sub-functions, interdependencies, privacy, ethics
-1|KPIs and HR metrics|HR metrics are broader; every KPI is a metric|Completely unrelated|KPIs replace HR metrics|Metrics only for recruitment
-2|Which is NOT a step of Data Analytics?|Data Encryption|Data Collection|Data Visualization|Findings
-2|A data visualization tool|Power BI|Photoshop|AutoCAD|MATLAB
-2|Quickly summarize average work experience in raw Excel|Pivot Table|Data Studio|Recommended Pivot Tables|Conditional Formatting
-2|Visual breakdown of UG, PG, PhD applicants|Pivot Chart|Pivot Table|SN field|Status of interview field
-2|Where to drag "City" to get counts per city as rows|Rows area|Values area|Filters area|Columns area
-2|Recommended Pivot Tables need you to drag every field manually.|False|True
-2|Which visualization tool is a coding/statistical language?|R|Tableau|Data Studio|Power-BI
-2|Field used to answer "How many are UG, PG, PhD?"|Education|Work Experience|Department|Status of interview
-2|Turn a Pivot Table into a chart via|PivotTable Analyze/Design → PivotChart|Formulas → Insert Chart|Review → Chart Tools|Page Layout → Visualize
-2|A text/ID field in Values defaults to|Count|Sum|Product|Average
-3|Poor employer branding hurts sourcing. Which constraint?|Poor image|Limited budget|Government policy|Conservative internal policies
-3|Correct source–category pair|Promotions and transfer: Internal|Job bidding: External|Employee referrals: External|Educational institutions: Internal
-3|Close gender/ethnic gaps in senior management|Diverse partner orgs, mentorship, bias training|Higher salaries, remote work|Lower qualifications, internal promotions only|Outsource to agencies
-3|Attract non-traditional candidates in 'Identifying HR Requirements'|Inclusive language, less jargon, flexible work in job descriptions|Ads only on LinkedIn and Naukri|Require CISSP and CISM|Formal degrees only
-3|Removing names and identifiers from resumes is ___ recruitment|Blind|Panel-based|Competency-based|Structured
-3|'Hire for attitude, train for skill' mainly evaluates technical expertise over values.|False|True
-3|High time-to-hire and unknown best channel: best tools|ATS + job boards + CRM|Spreadsheets + periodic reviews|More paid postings + monthly audits|Helpdesk + Excel training
-3|6-month surge plus source evaluation|Temporary employees; yield ratios|Employee leasing; surveys|Subcontracting; process flowchart|Outsourcing; time-lapse data
-3|LinkedIn's primary external hiring focus was active job seekers.|False|True
-3|Cut 60-day time-to-hire for engineers|AI screening + self-service interview scheduling|More recruiters + walk-ins|Fewer rounds + higher salaries|University partnerships + campus drives
-4|Yes to "like to work here", No to "plan to apply": stage|Consideration|Awareness only|Preference|No interest
-4|'Praises' data from Best Place to Work employees shows|Why people come and stay|Why employees leave|External vs internal hiring cost|Career page views
-4|Internal Branding Matrix mainly uses salary benchmarking and compensation revision.|False|True
-4|Surface vs Deep Diversity|Surface: gender, religion, city, education. Deep: attitude, belief, values, motivation|Surface: attitude, belief. Deep: gender, religion|Happiness Index vs Knowledge Sharing Index|Internal hires vs external hires
-4|Post-hire metrics showing the right people were recruited|Quality of hire and early attrition|Regret rate, application-to-offer ratio|Applications received, cost per application|Candidate experience, job search intensity
-4|Source effectiveness is judged only by relevant applications, ignoring cost.|False|True
-4|Best practice for developing the pool|Large pool of internal and external candidates; consult employees|External candidates only|Generic competency models|Hire only when a vacancy arises
-4|Correct interview type–definition match|Behavioural: actual work incidents, what the applicant did|Situational: questions as they come to mind|Structured: predetermined job-related questions|Panel: hypothetical incident
-4|High early attrition, halo-effect ratings, skipped Audit and Review|Train on Halo Effect, track early attrition, institutionalize Audit and Review|Written aptitude tests only|Expand the pool only|Medical and reference checks only
-4|Ability of a tool to measure consistently (repeat scores ≈ same)|Reliability|Validity|Standardisation|Suitability
-5|"Effectiveness of Selection Method" table assesses|Person-job fit, performance rating, cost|Resume quality|Communication skills|Training effectiveness
-5|Metric for recruitment efficiency|Yield ratio|Absenteeism|Diversity index|Attrition rate
-5|Source meeting most high-level role expectations|Employee Referrals|Consultants|Job Portal|Campus hiring
-5|Ideal trait of an effective selection test|Predictive of job performance|Ease of administration|Low drop rate|High salary correlation
-5|How accurately selection analytics predicts performance|Actual vs predicted performance|Number of rounds|Manager intuition|Interview duration
-5|"Cost per Joinee" considers|Total recruitment expenditure and number of joinees|Manager rating|Interview duration|Salary band only
-5|A "false negative" in selection|A successful candidate is not hired|An unsuccessful candidate is hired|An unsuccessful candidate is not hired|A successful candidate is hired
-5|An inappropriate cut score causes|More false positives or false negatives|Higher salaries|Lower cost per hire|Perfect performance
-5|"Fit Percentage" indicates|Alignment among job, team, supervisor, organization|Resume match rate|Candidates per recruiter|Salary satisfaction
-5|Best data to spot hiring bias|Gender-wise hiring ratio|Cost per joinee|Average interview questions|Tenure by marital status
-6|Who should be trained first?|Those with motivation to learn|Education level|Salary level|Age
-6|Skill inventory analysis compares|Available vs required skills|Budget vs outcomes|Age vs performance|Training vs education
-6|Phase measuring training outcomes|Evaluation|Assessment|Implementation|Alignment
-6|Training coverage|Employees trained / total employees|Training budget|Department size|HR ratio
-6|Training (vs development) aims at|Current job preparation|Career enhancement|Employee motivation|Strategic planning
-6|Training absenteeism formula|Employees absent / total training participants|Total training time / absent|Present / total employees|Trained / absent
-6|Importance dimension in task analysis|Criticality of the task|Age|Training length|Training method
-6|Who typically initiates training?|Management|Employees|External trainers|Government
-6|"Cost per learning hour received" assesses|Cost efficiency|Learning outcomes|Staff engagement|Department needs
-6|Teamwork skill level in inventory analysis|Performance rating|Training hours|Seniority|Department revenue
-7|Coaching is most effective when|There is an open relationship|Supervisors uninvolved|Trainees left alone|Feedback avoided
-7|Understudy training|Acting as temporary substitute for a manager|Lecturing executives|Replacing peers unguided|Random job hopping
-7|Exposure to diverse functions via advisory groups|Multiple management|Understudy|Job rotation|Case study
-7|Developing reasoning skills|Case study|Role playing|Business games|Sensitivity training
-7|Executive gains cross-functional experience via|Job rotation|Role play|Coaching|Special readings
-7|Traditional practices are shifting toward|Participation-based development|Eliminating training|Fixed-role models|Manager-exclusive development
-7|A suggested future HR role|Preserve and increase organizational knowledge|Control salaries only|Isolate departments|Promote top-down learning only
-7|Important learning metric|Attitude change|Holidays taken|Dress code adoption|Marketing redesign
-7|Employee reaction to training may include|Satisfaction with course delivery|Ignoring content|Dismissing instructors|Refusing appraisals
-7|Training evaluation criteria do NOT include|Sales promotions|Learning|Employee reactions|Business results
-8|Training effectiveness chart visualizes|Subject-wise performance|Weather patterns|Departmental shifts|Meal preferences
-8|Financial metric tracked department-wise|Training Cost|Bonus expenditure|Rent allocation|Reimbursement rate
-8|Duration metric in training visualization|Department-wise Training Duration|Employee retention|Vacation time|Resignation period
-8|Trait in the benchmark skills table|Compassion and sensitivity|Punctuality|Typing speed|Accent clarity
-8|Development summary component from self and others' input|Listens to others|Leave balance|Health insurance|Seating layout
-8|Interpersonal relationship development includes|Facilitates team success|Conflict creation|Attendance reporting|Wage compliance
-8|Internal development program activity|Job rotation|External consulting|Legal compliance|Budget proposal writing
-8|Job experiences matrix: decisions under stress|Adverse business conditions|Group exercise|Party planning|Time logging
-8|\"Making Transitions\" signifies|Unfamiliar responsibilities|Time zone shift|Changing passwords|Location mapping
-8|Element supporting culture development|Feedback mechanism|Leave policy|Snack availability|Commute distance
-9|Performance appraisal is primarily|Evaluating work behavior and potential|Monitoring finances|Expanding customers|Managing tech infrastructure
-9|Performance management differs from appraisal as it|Includes evaluation, improvement, rewards|Focuses only on salary revisions|Is only annual reporting|Excludes development
-9|After measuring performance, compare results with ___|Standards|Compensation plans|Labor unions|Inventories
-9|Multiple-person evaluation method|Paired comparison|Essay evaluation|Critical incidents|Checklist method
-9|Method using behavioural examples as anchors for levels|BARS|KRA|MBO|HRA
-9|360-degree appraisal mainly provides|Confidential anonymous feedback|Tax records|Product estimates|Inventory statistics
-9|If innovation is the objective, standards include|New ideas and implemented projects|Administrative hierarchy|Attendance frequency|Warehouse movement
-9|InnovateTech included cross-functional ___ in standards|Training|Outsourcing|Auditing|Marketing
-9|Quantitative criteria: sales figures and project completion ___|Times|Behaviors|Policies|Attitudes
-9|Intentional rating distortion means|Deliberate manipulation of ratings|Calculation errors|Communication failures|Audit inconsistencies
-10|Return on equity in the balanced scorecard|Lag indicator|Behavioral indicator|Recruitment indicator|Training indicator
-10|9 Box Matrix evaluates potential rating and|Performance rating|Compensation ratio|Training frequency|Attendance score
-10|On-time delivery was a lead indicator for customers.|True|False
-10|Defect rate and unit product cost fall under|Internal business processes|External customer relations|Workforce engagement|Strategic compensation
-10|Motivation, ability, opportunity identify|Causes of underperformance|Compensation structures|Recruitment procedures|Succession plans
-10|Variable pay: bonuses, incentives, stock ___|Option|Exchange|Allocation|Planning
-10|A non-financial reward|Family picnic|Retirement pension|Performance bonus|Stock option
-10|Skills Gap Analysis compares current skills with|Future organizational needs|Transportation requirements|Inventory classes|Tax rules
-10|DEI = Diversity, Equity, and|Inclusion|Integrity|Investment|Innovation
-10|Compensation philosophy mainly defines|Employee value proposition|Transport infrastructure|Tax reporting|Warehouse planning
-11|Pay mix: base wage, benefits, and|Long-term incentives|Transport allowance|Tax credits|Inventory rewards
-11|Job evaluation points are linked with compensation and benefits amounts.|True|False
-11|Compensation matrices align pay with|Job worth and evaluation points|Warehouse efficiency|Tax compliance|Transport scheduling
-11|Pay increase impact compared old employees with|New employees|Contractual workers|Consultants|Interns
-11|Quartile-wise salary analysis identifies|Pay-gap patterns|Supply chain gaps|Transport inefficiencies|Inventory shortages
-11|Benefit analysis: retirement plans and|Wellness programs|Transport insurance|Tax assistance|Warehouse maintenance
-11|Attendance was a criterion for ___ incentive plans|Individual|Departmental|Regional|Operational
-11|Companywide incentives: operational efficiency and|Employee stock earnings|Transport expenses|Office maintenance|Inventory movement
-11|Compa Ratio uses pay rate and|Pay range midpoint|Annual tax rate|Transport allowance|Inventory value
-11|Hiring management trainees builds a talent ___|Pipeline|Network|Matrix|Database
-12|Role of Tableau in HR Analytics|Converts data into visual analytical insights|Stores employee records|Manages communication|Develops websites
-12|Tableau works with different types of data sources.|True|False
-12|Best for comparing values across departments|Bar Chart|Scatter Plot|Text Document|Data Table
-12|Average joining delay across employees is|Data aggregation|Data connection|Data extraction|Data formatting
-12|Why Tableau suits complex datasets|Interactive visual exploration|Fixed reporting structure|Manual data entry|Static documents
-12|Multidimensional analysis|Comparing data across several dimensions|One variable in isolation|One record at a time|A single fixed view
-12|A Tableau worksheet is|An individual analytical view of data|Connected data sources|Multiple dashboards|Record storage
-12|Benefit of visualizing aggregated HR data|Patterns and comparisons are easier to interpret|More records|No need for source data|Blocks exploration
-12|Purpose of a calculated field|Create a new variable from existing data|Delete variables|Replace the data source|Convert variables to graphics
-12|Tableau function for date difference|DATEDIFF|DATEADD|DATENAME|DATEPART`;
-
-    // Discrepancy & pedagogical notes mapped by question index
+    // 120 Verified Questions from NPTEL HR Analytics (IIT Roorkee, Weeks 1 to 12) - Exact PDF Wording
     const NOTES_MAP = {
       37: "Note: Option (Structured) specifies predetermined job-related questions. However, the official NPTEL answer key marks 'Behavioural' (actual work incidents).",
-      108: "Note: The NPTEL answer sheet erroneously marks 'annual tax rate', but Compa Ratio is formally defined in compensation analytics as Current Pay / Pay Range Midpoint."
+      108: "Note: The NPTEL answer sheet marks 'annual tax rate', but Compa Ratio is formally defined in compensation analytics as Current Pay / Pay Range Midpoint."
     };
 
-    // Parse question records
-    const QUESTIONS = RAW_DATA.trim().split('\n').map((line, idx) => {
-      const parts = line.split('|');
-      return {
-        id: idx,
-        week: parseInt(parts[0], 10),
-        question: parts[1],
-        correct: parts[2],
-        options: parts.slice(2),
-        weekQNum: 0
-      };
-    });
-
-    // Assign per-week question numbers (1 to 10)
-    const weekCounters = {};
-    QUESTIONS.forEach(q => {
-      weekCounters[q.week] = (weekCounters[q.week] || 0) + 1;
-      q.weekQNum = weekCounters[q.week];
-    });
+    const QUESTIONS = [
+    {
+        "id": 0,
+        "week": 1,
+        "weekQNum": 1,
+        "question": "Which of the following is NOT an example of a descriptive analytics tool used in HR?",
+        "options": [
+            "Mean and standard deviation",
+            "Counts and ratios",
+            "Decision trees and random forests",
+            "Mode and median"
+        ],
+        "correct": "Decision trees and random forests"
+    },
+    {
+        "id": 1,
+        "week": 1,
+        "weekQNum": 2,
+        "question": "HR analytics differs from HRMIS primarily because HR analytics has the potential to connect HR processes and decisions with ______.",
+        "options": [
+            "Employee satisfaction scores only",
+            "Regulatory compliance requirements",
+            "Payroll and compensation structures",
+            "Organization performance"
+        ],
+        "correct": "Organization performance"
+    },
+    {
+        "id": 2,
+        "week": 1,
+        "weekQNum": 3,
+        "question": "According to the criteria for good HR activity metrics, every metric must explicitly describe what it does NOT include. This rule primarily ensures ______.",
+        "options": [
+            "That metrics are visually appealing in dashboards",
+            "Clarity and prevention of misinterpretation of calculations",
+            "That metrics are aligned with competitor benchmarks",
+            "That only positive outcomes are measured and reported"
+        ],
+        "correct": "Clarity and prevention of misinterpretation of calculations"
+    },
+    {
+        "id": 3,
+        "week": 1,
+        "weekQNum": 4,
+        "question": "According to the criteria for good HR activity metrics, an organization should capture and track all possible metrics, even those not currently being used, to build a comprehensive data history.",
+        "options": [
+            "True",
+            "False"
+        ],
+        "correct": "False"
+    },
+    {
+        "id": 4,
+        "week": 1,
+        "weekQNum": 5,
+        "question": "A good HR problem definition must cover three elements. Which of the following correctly lists all three?",
+        "options": [
+            "A statement of what, a statement of why, and a desired state or outcome",
+            "A statement of who, a statement of when, and a budget estimate",
+            "A statement of the problem, a timeline, and a team assignment",
+            "A cost-benefit analysis, a risk assessment, and an expected output"
+        ],
+        "correct": "A statement of what, a statement of why, and a desired state or outcome"
+    },
+    {
+        "id": 5,
+        "week": 1,
+        "weekQNum": 6,
+        "question": "The overconfidence trap is described as particularly dangerous because it prevents analysts and decision makers from ______.",
+        "options": [
+            "Using advanced statistical tools",
+            "Questioning their methods, motivation, and the way they communicate findings",
+            "Collaborating with HR business partners",
+            "Collecting sufficient sample data for analysis"
+        ],
+        "correct": "Questioning their methods, motivation, and the way they communicate findings"
+    },
+    {
+        "id": 6,
+        "week": 1,
+        "weekQNum": 7,
+        "question": "Which of the following best describes the 'overfitting trap' in HR analytics?",
+        "options": [
+            "The analyst uses too few variables to build a reliable model",
+            "The analyst collects more data than is needed for the analysis",
+            "The visualization uses too many chart types, causing confusion",
+            "The model performs well on training data but poorly on new real-world data"
+        ],
+        "correct": "The model performs well on training data but poorly on new real-world data"
+    },
+    {
+        "id": 7,
+        "week": 1,
+        "weekQNum": 8,
+        "question": "In the stakeholder engagement framework for HR analytics, data owners, technology owners, and subject matter experts are classified as ______.",
+        "options": [
+            "Stakeholders served",
+            "Stakeholders depended upon",
+            "Stakeholders impacted",
+            "Stakeholders managed"
+        ],
+        "correct": "Stakeholders depended upon"
+    },
+    {
+        "id": 8,
+        "week": 1,
+        "weekQNum": 9,
+        "question": "Which of the following correctly lists the four components of the 'Six Skills for Success' category called 'Business Acumen'?",
+        "options": [
+            "Data awareness, Statistical methods, Visualization, Writing",
+            "Problem definition, Project management, Change management, Stakeholder management",
+            "Financial literacy, Political astuteness, Internal awareness, External awareness",
+            "HR sub-functions, HR interdependencies, Privacy, Ethics"
+        ],
+        "correct": "Financial literacy, Political astuteness, Internal awareness, External awareness"
+    },
+    {
+        "id": 9,
+        "week": 1,
+        "weekQNum": 10,
+        "question": "Which of the following statements best describes the relationship between KPIs and HR metrics?",
+        "options": [
+            "KPIs and HR metrics are completely unrelated measurement tools",
+            "HR metrics are a broader category, and every KPI is a metric",
+            "KPIs replace traditional HR metrics in modern organizations",
+            "HR metrics only apply to recruitment; KPIs apply to all functions"
+        ],
+        "correct": "HR metrics are a broader category, and every KPI is a metric"
+    },
+    {
+        "id": 10,
+        "week": 2,
+        "weekQNum": 1,
+        "question": "Which of the following is NOT one of the steps of Data Analytics?",
+        "options": [
+            "Data Collection",
+            "Data Visualization",
+            "Data Encryption",
+            "Findings"
+        ],
+        "correct": "Data Encryption"
+    },
+    {
+        "id": 11,
+        "week": 2,
+        "weekQNum": 2,
+        "question": "Which of the following is a tool for Data Visualization?",
+        "options": [
+            "Power BI",
+            "Photoshop",
+            "AutoCAD",
+            "MATLAB"
+        ],
+        "correct": "Power BI"
+    },
+    {
+        "id": 12,
+        "week": 2,
+        "weekQNum": 3,
+        "question": "An HR manager wants to know the average work experience of all applicants from a raw Excel dataset. Which Excel feature would be most appropriate to summarize this quickly?",
+        "options": [
+            "Data Studio",
+            "Recommended Pivot tables",
+            "Conditional Formatting",
+            "Pivot Table"
+        ],
+        "correct": "Pivot Table"
+    },
+    {
+        "id": 13,
+        "week": 2,
+        "weekQNum": 4,
+        "question": "A manager wants a visual breakdown of \"how many applicants are UG, PG, and PhD\" for a quick presentation. Based on the Excel tools, which would best serve this purpose?",
+        "options": [
+            "Pivot Table",
+            "Pivot Chart",
+            "SN field",
+            "Status of interview field"
+        ],
+        "correct": "Pivot Chart"
+    },
+    {
+        "id": 14,
+        "week": 2,
+        "weekQNum": 5,
+        "question": "After inserting a Pivot Table from your applicant dataset, where would you drag the \"City\" field to see the count of applicants per city as rows?",
+        "options": [
+            "Rows area",
+            "Values area",
+            "Filters area",
+            "Columns area"
+        ],
+        "correct": "Rows area"
+    },
+    {
+        "id": 15,
+        "week": 2,
+        "weekQNum": 6,
+        "question": "Recommended Pivot Tables in Excel require the user to manually drag every field into Rows, Columns, and Values.",
+        "options": [
+            "True",
+            "False"
+        ],
+        "correct": "False"
+    },
+    {
+        "id": 16,
+        "week": 2,
+        "weekQNum": 7,
+        "question": "Among the Data Visualization tools, which one is a coding/statistical language rather than a dashboard or spreadsheet tool?",
+        "options": [
+            "Tableau",
+            "Data Studio",
+            "R",
+            "Power-BI"
+        ],
+        "correct": "R"
+    },
+    {
+        "id": 17,
+        "week": 2,
+        "weekQNum": 8,
+        "question": "When an HR manager asks, \"How many are UG, PG, and PhD? \" the relevant field from Applicant Analysis used to answer this is______.",
+        "options": [
+            "Work Experience",
+            "Education",
+            "Department",
+            "Status of interview"
+        ],
+        "correct": "Education"
+    },
+    {
+        "id": 18,
+        "week": 2,
+        "weekQNum": 9,
+        "question": "You've built a Pivot Table showing applicant counts by City. To convert this into a visual chart, which route would you use?",
+        "options": [
+            "Formulas → Insert Chart",
+            "PivotTable Analyze/Design → PivotChart",
+            "Review → Chart Tools",
+            "Page Layout → Visualize"
+        ],
+        "correct": "PivotTable Analyze/Design → PivotChart"
+    },
+    {
+        "id": 19,
+        "week": 2,
+        "weekQNum": 10,
+        "question": "When you drag a text/ID-type field like \"SN\" or \"Gender\" into the Values area of a Pivot Table, which summary function does it default to?",
+        "options": [
+            "Sum",
+            "Product",
+            "Average",
+            "Count"
+        ],
+        "correct": "Count"
+    },
+    {
+        "id": 20,
+        "week": 3,
+        "weekQNum": 1,
+        "question": "A manufacturing company with an outdated work culture and poor employer branding is struggling to attract candidates even after posting on multiple platforms. Which influence, as listed under constraints on choosing a recruiting source, most directly explains this problem?",
+        "options": [
+            "Limited budgetary support",
+            "Restrictive policies of the government",
+            "Poor image",
+            "Conservative internal policies"
+        ],
+        "correct": "Poor image"
+    },
+    {
+        "id": 21,
+        "week": 3,
+        "weekQNum": 2,
+        "question": "Which of the following correctly pairs a recruitment source with its category?",
+        "options": [
+            "Job bidding — External Method",
+            "Employee referrals — External Method",
+            "Educational institutions — Internal Method",
+            "Promotions and transfer — Internal Method"
+        ],
+        "correct": "Promotions and transfer — Internal Method"
+    },
+    {
+        "id": 22,
+        "week": 3,
+        "weekQNum": 3,
+        "question": "FinServe, a financial services firm, identifies gaps in gender and ethnic diversity, particularly in senior management. Which combination of strategies most directly addresses this challenge?",
+        "options": [
+            "Increasing salaries and offering remote work options.",
+            "Partnering with diverse professional organizations, mentorship programs, and unconscious bias training.",
+            "Reducing qualification requirements and using only internal promotions.",
+            "Outsourcing recruitment exclusively to third-party agencies."
+        ],
+        "correct": "Partnering with diverse professional organizations, mentorship programs, and unconscious bias training."
+    },
+    {
+        "id": 23,
+        "week": 3,
+        "weekQNum": 4,
+        "question": "DiversityDesigns, a graphic design agency, wants to attract candidates from non-traditional and self-taught backgrounds. Which of the following actions directly supports this goal in the 'Identifying HR Requirements' step?",
+        "options": [
+            "Publishing job ads only on LinkedIn and Naukri.",
+            "Requiring CISSP and CISM certifications for all applicants.",
+            "Using inclusive language, avoiding unnecessary jargon, and highlighting flexible working arrangements in job descriptions.",
+            "Limiting applications to candidates with formal degrees from recognized universities."
+        ],
+        "correct": "Using inclusive language, avoiding unnecessary jargon, and highlighting flexible working arrangements in job descriptions."
+    },
+    {
+        "id": 24,
+        "week": 3,
+        "weekQNum": 5,
+        "question": "A company adopted a __________ recruitment strategy, which involves removing names and other identifying information from resumes and applications, to minimize unconscious bias during candidate screening.",
+        "options": [
+            "Blind",
+            "Panel-based",
+            "Competency-based",
+            "Structured"
+        ],
+        "correct": "Blind"
+    },
+    {
+        "id": 25,
+        "week": 3,
+        "weekQNum": 6,
+        "question": "A company adopting the 'hire for attitude, train for skill' philosophy primarily focuses on evaluating candidates' technical expertise and domain knowledge rather than their alignment with company values.",
+        "options": [
+            "True",
+            "False"
+        ],
+        "correct": "False"
+    },
+    {
+        "id": 26,
+        "week": 3,
+        "weekQNum": 7,
+        "question": "An organization is experiencing high time-to-hire and is unable to identify which sourcing channels deliver the best candidates. Which combination of technological tools would best address both challenges simultaneously?",
+        "options": [
+            "Using spreadsheets for manual tracking combined with periodic reviews by HR managers.",
+            "Increasing the number of job postings on paid portals and conducting monthly HR audits.",
+            "Deploying an Applicant Tracking System (ATS) integrated with job boards and a Candidate Relationship Management (CRM) tool.",
+            "Setting up an internal HR helpdesk and training managers in Excel-based reporting."
+        ],
+        "correct": "Deploying an Applicant Tracking System (ATS) integrated with job boards and a Candidate Relationship Management (CRM) tool."
+    },
+    {
+        "id": 27,
+        "week": 3,
+        "weekQNum": 8,
+        "question": "An IT company facing a sudden spike in project demand needs to scale its workforce for 6 months without the long-term commitment of permanent hiring. At the same time, the HR team wants to evaluate the effectiveness of the current recruitment source before committing further. Which combination of strategies would be most appropriate?",
+        "options": [
+            "Use temporary employees as an alternative to recruiting and evaluate the source using yield ratios.",
+            "Opt for employee leasing and evaluate the source using surveys and studies.",
+            "Use subcontracting and evaluate the source using the recruitment process flowchart.",
+            "Use outsourcing as an alternative to recruiting and evaluate the source using time-lapse data."
+        ],
+        "correct": "Use temporary employees as an alternative to recruiting and evaluate the source using yield ratios."
+    },
+    {
+        "id": 28,
+        "week": 3,
+        "weekQNum": 9,
+        "question": "LinkedIn's primary strategy for external hiring was to focus on active job seekers, candidates who were actively looking for new employment at the time of recruitment.",
+        "options": [
+            "True",
+            "False"
+        ],
+        "correct": "False"
+    },
+    {
+        "id": 29,
+        "week": 3,
+        "weekQNum": 10,
+        "question": "Any company’s average time to hire software engineers was 60 days, which was above the industry average. What two interventions might that company implement to reduce this gap?",
+        "options": [
+            "Increasing recruiter headcount and conducting walk-in interviews.",
+            "Reducing the number of interview rounds and offering higher salaries.",
+            "Partnering with universities and deploying campus placement drives.",
+            "Implementing an AI-powered screening tool and a self-service interview scheduling system."
+        ],
+        "correct": "Implementing an AI-powered screening tool and a self-service interview scheduling system."
+    },
+    {
+        "id": 30,
+        "week": 4,
+        "weekQNum": 1,
+        "question": "A candidate who answers 'Yes' to 'Would you like to work for this company?' but 'No' to 'Are you planning to apply for this company?' is classified at which stage of the Employer Brand Image Analysis framework?",
+        "options": [
+            "Awareness stage only.",
+            "Consideration stage — interested but not yet at Preference.",
+            "Preference stage — ready to apply.",
+            "Neither Awareness nor Consideration — they have no interest."
+        ],
+        "correct": "Consideration stage — interested but not yet at Preference."
+    },
+    {
+        "id": 31,
+        "week": 4,
+        "weekQNum": 2,
+        "question": "As per the Employer Branding Value Propositions framework (Complain and Praises Analysis), which of the following correctly describes what 'Praises' data from employees of the 'Best Place to Work' category represents?",
+        "options": [
+            "The reasons why employees leave the organization.",
+            "The marginal cost of external hiring versus internal promotion.",
+            "The metrics are tracked in the Social Media Matrix for career page views.",
+            "The reasons why people come and stay in the organization."
+        ],
+        "correct": "The reasons why people come and stay in the organization."
+    },
+    {
+        "id": 32,
+        "week": 4,
+        "weekQNum": 3,
+        "question": "The Internal Branding Matrix includes salary benchmarking and compensation revision as its primary tools for strengthening the employer brand among existing employees.",
+        "options": [
+            "True",
+            "False"
+        ],
+        "correct": "False"
+    },
+    {
+        "id": 33,
+        "week": 4,
+        "weekQNum": 4,
+        "question": "Which of the following correctly distinguishes 'Surface Diversity' from 'Deep Diversity'?",
+        "options": [
+            "Surface diversity includes attitude and belief; deep diversity includes gender and religion.",
+            "Surface diversity is measured using the Employee Happiness Index; deep diversity is measured using the Employee Knowledge Sharing Index.",
+            "Surface diversity covers observable attributes such as gender, religion, city, and education; deep diversity covers non-observable attributes such as attitude, belief, values, and motivation.",
+            "Surface diversity refers to internal hires; deep diversity refers to external hires with different cultural backgrounds."
+        ],
+        "correct": "Surface diversity covers observable attributes such as gender, religion, city, and education; deep diversity covers non-observable attributes such as attitude, belief, values, and motivation."
+    },
+    {
+        "id": 34,
+        "week": 4,
+        "weekQNum": 5,
+        "question": "An HR analytics team wants to evaluate the quality of the recruitment process after candidates have joined. Which of the following post-hire metrics would most directly indicate whether the right people were recruited?",
+        "options": [
+            "Quality of hire and early attrition.",
+            "Rengage rate and application-to-job-offer ratio.",
+            "Number of applications received and cost per application.",
+            "Candidate experience score and job search intensity."
+        ],
+        "correct": "Quality of hire and early attrition."
+    },
+    {
+        "id": 35,
+        "week": 4,
+        "weekQNum": 6,
+        "question": "The effectiveness of a recruitment source is evaluated solely based on the number of relevant applications received, with no consideration of cost.",
+        "options": [
+            "True",
+            "False"
+        ],
+        "correct": "False"
+    },
+    {
+        "id": 36,
+        "week": 4,
+        "weekQNum": 7,
+        "question": "In the Comprehensive End-to-End Recruitment and Selection Process , which of the following is listed as Best Practice for Developing the Pool?",
+        "options": [
+            "Looking only for external candidates to bring in fresh perspectives.",
+            "Relying on generic competency models to shortlist candidates quickly.",
+            "Developing a large pool that includes both internal and external candidates, and consulting employees.",
+            "Hiring only when a vacancy arises and indulging in irrational optimism about available talent."
+        ],
+        "correct": "Developing a large pool that includes both internal and external candidates, and consulting employees."
+    },
+    {
+        "id": 37,
+        "week": 4,
+        "weekQNum": 8,
+        "question": "Which of the following correctly matches a Type of Interview with its definition?",
+        "options": [
+            "Situational Interview – The recruiter asks questions as they come to mind.",
+            "Structured Interview – The recruiter uses a predetermined set of questions that are clearly job-related.",
+            "Panel Interview – The recruiter presents a hypothetical incident and asks the candidate to respond.",
+            "Behavioural Interview – The focus is on actual work-related incidents, and the applicant is asked to reveal what he or she did in a given situation."
+        ],
+        "correct": "Behavioural Interview – The focus is on actual work-related incidents, and the applicant is asked to reveal what he or she did in a given situation."
+    },
+    {
+        "id": 38,
+        "week": 4,
+        "weekQNum": 9,
+        "question": "A company's HR team finds that: (i) new hires show high early attrition within six months of joining, (ii) interviewers consistently over-rate candidates who present confidently, regardless of technical fit, and (iii) the Audit and Review step is being skipped after each hiring cycle. Which combined approach would most comprehensively address all three issues?",
+        "options": [
+            "Replace all interview rounds with written aptitude tests alone to eliminate interviewer subjectivity.",
+            "Train interviewers to recognize the Halo Effect so that one impressive trait does not distort the overall rating; track early attrition as a post-hire quality signal to assess whether the right candidates were selected; and institutionalize the Audit and Review step to regularly examine and improve hiring practices.",
+            "Focus exclusively on expanding the application pool by including both internal and external candidates to improve the odds of finding the right hire.",
+            "Use only the medical examination and reference check stages to filter candidates before the final placement decision."
+        ],
+        "correct": "Train interviewers to recognize the Halo Effect so that one impressive trait does not distort the overall rating; track early attrition as a post-hire quality signal to assess whether the right candidates were selected; and institutionalize the Audit and Review step to regularly examine and improve hiring practices."
+    },
+    {
+        "id": 39,
+        "week": 4,
+        "weekQNum": 10,
+        "question": "__________ is the ability of a selection tool to measure an attribute consistently, such that repeated administration to the same individual yields approximately identical scores.",
+        "options": [
+            "Reliability",
+            "Validity",
+            "Standardisation",
+            "Suitability"
+        ],
+        "correct": "Reliability"
+    },
+    {
+        "id": 40,
+        "week": 5,
+        "weekQNum": 1,
+        "question": "What aspects does the “Effectiveness of Selection Method” table assess?",
+        "options": [
+            "Resume quality",
+            "Communication skills",
+            "Person-job fit, performance rating, and cost",
+            "Training effectiveness"
+        ],
+        "correct": "Person-job fit, performance rating, and cost"
+    },
+    {
+        "id": 41,
+        "week": 5,
+        "weekQNum": 2,
+        "question": "Which metric in recruitment visualization is used to assess recruitment efficiency?",
+        "options": [
+            "Yield ratio",
+            "Absenteeism",
+            "Diversity index",
+            "Attrition rate"
+        ],
+        "correct": "Yield ratio"
+    },
+    {
+        "id": 42,
+        "week": 5,
+        "weekQNum": 3,
+        "question": "Which recruitment source fulfilled the highest percentage of high-level role expectations?",
+        "options": [
+            "Consultants",
+            "Employee Referrals",
+            "Job Portal",
+            "Campus hiring"
+        ],
+        "correct": "Employee Referrals"
+    },
+    {
+        "id": 43,
+        "week": 5,
+        "weekQNum": 4,
+        "question": "What is the ideal characteristic of an effective testing component in the selection process?",
+        "options": [
+            "Ease of administration",
+            "Low candidate drop rate",
+            "High salary correlation",
+            "Predictive of job performance"
+        ],
+        "correct": "Predictive of job performance"
+    },
+    {
+        "id": 44,
+        "week": 5,
+        "weekQNum": 5,
+        "question": "Which measure is used to evaluate how accurately selection analytics predict candidate performance?",
+        "options": [
+            "Number of selection rounds",
+            "Actual vs. predicted performance",
+            "Hiring manager’s intuition",
+            "Duration of the interview"
+        ],
+        "correct": "Actual vs. predicted performance"
+    },
+    {
+        "id": 45,
+        "week": 5,
+        "weekQNum": 6,
+        "question": "Which factors are considered when determining the “Cost per Joinee”?",
+        "options": [
+            "Hiring manager’s rating",
+            "Interview duration",
+            "Total recruitment expenditure and number of joinees",
+            "Salary band only"
+        ],
+        "correct": "Total recruitment expenditure and number of joinees"
+    },
+    {
+        "id": 46,
+        "week": 5,
+        "weekQNum": 7,
+        "question": "In outcome-based selection analysis, which situation represents a “false negative”?",
+        "options": [
+            "An unsuccessful candidate is hired",
+            "A successful candidate is not hired",
+            "An unsuccessful candidate is not hired",
+            "A successful candidate is hired"
+        ],
+        "correct": "A successful candidate is not hired"
+    },
+    {
+        "id": 47,
+        "week": 5,
+        "weekQNum": 8,
+        "question": "What may result from using an inappropriate cut score in the selection process?",
+        "options": [
+            "Higher salaries offered",
+            "Reduced cost per hire",
+            "Increased false positives or false negatives",
+            "Perfect employee performance"
+        ],
+        "correct": "Increased false positives or false negatives"
+    },
+    {
+        "id": 48,
+        "week": 5,
+        "weekQNum": 9,
+        "question": "In selection analytics, what does the term “Fit Percentage” indicate?",
+        "options": [
+            "Degree of alignment among the job, team, supervisor, and organization",
+            "Resume match rate",
+            "Ratio of candidates to recruiters",
+            "Level of salary satisfaction"
+        ],
+        "correct": "Degree of alignment among the job, team, supervisor, and organization"
+    },
+    {
+        "id": 49,
+        "week": 5,
+        "weekQNum": 10,
+        "question": "Which data set is most appropriate for identifying potential bias in the hiring process?",
+        "options": [
+            "Cost per joinee",
+            "Gender-wise hiring ratio",
+            "Average number of interview questions",
+            "Tenure by marital status"
+        ],
+        "correct": "Gender-wise hiring ratio"
+    },
+    {
+        "id": 50,
+        "week": 6,
+        "weekQNum": 1,
+        "question": "Which factor helps determine who should receive training first?",
+        "options": [
+            "Education level",
+            "Motivation to learn",
+            "Salary level",
+            "Age"
+        ],
+        "correct": "Motivation to learn"
+    },
+    {
+        "id": 51,
+        "week": 6,
+        "weekQNum": 2,
+        "question": "What does skill inventory analysis compare?",
+        "options": [
+            "Budget vs. outcomes",
+            "Age vs. performance",
+            "Available vs. required skills",
+            "Training vs. education"
+        ],
+        "correct": "Available vs. required skills"
+    },
+    {
+        "id": 52,
+        "week": 6,
+        "weekQNum": 3,
+        "question": "Which phase focuses on measuring training outcomes?",
+        "options": [
+            "Assessment",
+            "Implementation",
+            "Alignment",
+            "Evaluation"
+        ],
+        "correct": "Evaluation"
+    },
+    {
+        "id": 53,
+        "week": 6,
+        "weekQNum": 4,
+        "question": "What indicates training coverage within the organization?",
+        "options": [
+            "Training budget",
+            "Department size",
+            "Employee trained / Total number of employees",
+            "HR ratio"
+        ],
+        "correct": "Employee trained / Total number of employees"
+    },
+    {
+        "id": 54,
+        "week": 6,
+        "weekQNum": 5,
+        "question": "What is the goal of training in contrast to development?",
+        "options": [
+            "Career enhancement",
+            "Current job preparation",
+            "Employee motivation",
+            "Strategic planning"
+        ],
+        "correct": "Current job preparation"
+    },
+    {
+        "id": 55,
+        "week": 6,
+        "weekQNum": 6,
+        "question": "What is the correct formula for absenteeism in training?",
+        "options": [
+            "Total training time / Absent employees",
+            "Employees present / Total employees",
+            "Number of employee absent / Total training participants",
+            "Employees trained / Absent employees"
+        ],
+        "correct": "Number of employee absent / Total training participants"
+    },
+    {
+        "id": 56,
+        "week": 6,
+        "weekQNum": 7,
+        "question": "What is considered in the importance dimension during task analysis?",
+        "options": [
+            "Age",
+            "Training length",
+            "Criticality of the task",
+            "Training method"
+        ],
+        "correct": "Criticality of the task"
+    },
+    {
+        "id": 57,
+        "week": 6,
+        "weekQNum": 8,
+        "question": "Who typically initiates training programs?",
+        "options": [
+            "Management",
+            "Employees",
+            "External trainers",
+            "Government"
+        ],
+        "correct": "Management"
+    },
+    {
+        "id": 58,
+        "week": 6,
+        "weekQNum": 9,
+        "question": "What does \"Cost per learning hour received\" assess?",
+        "options": [
+            "Learning outcomes",
+            "Staff engagement",
+            "Cost efficiency",
+            "Department needs"
+        ],
+        "correct": "Cost efficiency"
+    },
+    {
+        "id": 59,
+        "week": 6,
+        "weekQNum": 10,
+        "question": "How is teamwork skill level assessed in inventory analysis?",
+        "options": [
+            "Hours of training received",
+            "Performance rating",
+            "Seniority",
+            "Department revenue"
+        ],
+        "correct": "Performance rating"
+    },
+    {
+        "id": 60,
+        "week": 7,
+        "weekQNum": 1,
+        "question": "Coaching is most effective when:",
+        "options": [
+            "Supervisors are uninvolved",
+            "There is an open relationship",
+            "Trainees are left alone",
+            "Feedback is avoided"
+        ],
+        "correct": "There is an open relationship"
+    },
+    {
+        "id": 61,
+        "week": 7,
+        "weekQNum": 2,
+        "question": "Understudy training involves:",
+        "options": [
+            "Lecturing to senior executives",
+            "Replacing peers without guidance",
+            "Acting as a temporary substitute for a manager",
+            "Random job hopping"
+        ],
+        "correct": "Acting as a temporary substitute for a manager"
+    },
+    {
+        "id": 62,
+        "week": 7,
+        "weekQNum": 3,
+        "question": "Which method provides exposure to diverse functions via advisory groups?",
+        "options": [
+            "Understudy",
+            "Job rotation",
+            "Multiple management",
+            "Case study"
+        ],
+        "correct": "Multiple management"
+    },
+    {
+        "id": 63,
+        "week": 7,
+        "weekQNum": 4,
+        "question": "A suitable method for developing reasoning skills is:",
+        "options": [
+            "Role playing",
+            "Business games",
+            "Case study",
+            "Sensitivity training"
+        ],
+        "correct": "Case study"
+    },
+    {
+        "id": 64,
+        "week": 7,
+        "weekQNum": 5,
+        "question": "An executive gains cross-functional experience through:",
+        "options": [
+            "Job rotation",
+            "Role play",
+            "Coaching",
+            "Special readings"
+        ],
+        "correct": "Job rotation"
+    },
+    {
+        "id": 65,
+        "week": 7,
+        "weekQNum": 6,
+        "question": "According to the research findings, traditional practices are shifting toward:",
+        "options": [
+            "Eliminating training",
+            "Fixed-role models",
+            "Participation-based development",
+            "Manager-exclusive development"
+        ],
+        "correct": "Participation-based development"
+    },
+    {
+        "id": 66,
+        "week": 7,
+        "weekQNum": 7,
+        "question": "A suggested HR role in the future is to:",
+        "options": [
+            "Control salaries only",
+            "Isolate departments",
+            "Preserve and increase organizational knowledge",
+            "Promote top-down learning only"
+        ],
+        "correct": "Preserve and increase organizational knowledge"
+    },
+    {
+        "id": 67,
+        "week": 7,
+        "weekQNum": 8,
+        "question": "What is an important learning metric from training?",
+        "options": [
+            "Number of holidays taken",
+            "Attitude change",
+            "New dress code adoption",
+            "Marketing strategy redesign"
+        ],
+        "correct": "Attitude change"
+    },
+    {
+        "id": 68,
+        "week": 7,
+        "weekQNum": 9,
+        "question": "An employee’s reaction to training may include:",
+        "options": [
+            "Ignoring training content",
+            "Dismissing instructors",
+            "Satisfaction with course delivery",
+            "Refusing to participate in appraisals"
+        ],
+        "correct": "Satisfaction with course delivery"
+    },
+    {
+        "id": 69,
+        "week": 7,
+        "weekQNum": 10,
+        "question": "Training evaluation criteria do NOT include:",
+        "options": [
+            "Sales promotions",
+            "Learning",
+            "Employee reactions",
+            "Business results"
+        ],
+        "correct": "Sales promotions"
+    },
+    {
+        "id": 70,
+        "week": 8,
+        "weekQNum": 1,
+        "question": "What is visualized in the training effectiveness chart?",
+        "options": [
+            "Weather patterns",
+            "Departmental shifts",
+            "Subject-wise performance",
+            "Meal preferences"
+        ],
+        "correct": "Subject-wise performance"
+    },
+    {
+        "id": 71,
+        "week": 8,
+        "weekQNum": 2,
+        "question": "What financial metric is tracked department-wise in training data?",
+        "options": [
+            "Training Cost",
+            "Bonus expenditure",
+            "Rent allocation",
+            "Reimbursement rate"
+        ],
+        "correct": "Training Cost"
+    },
+    {
+        "id": 72,
+        "week": 8,
+        "weekQNum": 3,
+        "question": "What duration metric is presented in the training visualization?",
+        "options": [
+            "Employee retention",
+            "Department-wise Training Duration",
+            "Vacation time",
+            "Resignation period"
+        ],
+        "correct": "Department-wise Training Duration"
+    },
+    {
+        "id": 73,
+        "week": 8,
+        "weekQNum": 4,
+        "question": "What character trait is listed in the benchmark skills table?",
+        "options": [
+            "Punctuality",
+            "Compassion and sensitivity",
+            "Typing speed",
+            "Accent clarity"
+        ],
+        "correct": "Compassion and sensitivity"
+    },
+    {
+        "id": 74,
+        "week": 8,
+        "weekQNum": 5,
+        "question": "Which is a component of development summary based on self and others’ input?",
+        "options": [
+            "Leave balance",
+            "Listens to others",
+            "Health insurance",
+            "Seating layout"
+        ],
+        "correct": "Listens to others"
+    },
+    {
+        "id": 75,
+        "week": 8,
+        "weekQNum": 6,
+        "question": "What is included in interpersonal relationship development?",
+        "options": [
+            "Conflict creation",
+            "Facilitates team success",
+            "Attendance reporting",
+            "Wage compliance"
+        ],
+        "correct": "Facilitates team success"
+    },
+    {
+        "id": 76,
+        "week": 8,
+        "weekQNum": 7,
+        "question": "Which activity is part of internal development programs?",
+        "options": [
+            "External consulting",
+            "Job rotation",
+            "Legal compliance",
+            "Budget proposal writing"
+        ],
+        "correct": "Job rotation"
+    },
+    {
+        "id": 77,
+        "week": 8,
+        "weekQNum": 8,
+        "question": "What method in job experiences matrix involves decision-making under stress?",
+        "options": [
+            "Group exercise",
+            "Adverse business conditions",
+            "Annual party planning",
+            "Time logging"
+        ],
+        "correct": "Adverse business conditions"
+    },
+    {
+        "id": 78,
+        "week": 8,
+        "weekQNum": 9,
+        "question": "What does \"Making Transitions\" in the job experience matrix signify?",
+        "options": [
+            "Time zone shift",
+            "Unfamiliar responsibilities",
+            "Changing passwords",
+            "Location mapping"
+        ],
+        "correct": "Unfamiliar responsibilities"
+    },
+    {
+        "id": 79,
+        "week": 8,
+        "weekQNum": 10,
+        "question": "What element supports the development of a culture?",
+        "options": [
+            "Leave policy",
+            "Feedback mechanism",
+            "Snack availability",
+            "Commute distance"
+        ],
+        "correct": "Feedback mechanism"
+    },
+    {
+        "id": 80,
+        "week": 9,
+        "weekQNum": 1,
+        "question": "Performance appraisal is primarily concerned with:",
+        "options": [
+            "Monitoring organizational finance activities",
+            "Expanding external customer relationships",
+            "Evaluating employee work behavior and potential",
+            "Managing technological infrastructure systems"
+        ],
+        "correct": "Evaluating employee work behavior and potential"
+    },
+    {
+        "id": 81,
+        "week": 9,
+        "weekQNum": 2,
+        "question": "Performance management differs from performance appraisal because it:",
+        "options": [
+            "focuses only on salary revisions",
+            "emphasizes only annual reporting systems",
+            "excludes employee development processes",
+            "includes evaluation, improvement, and rewards"
+        ],
+        "correct": "includes evaluation, improvement, and rewards"
+    },
+    {
+        "id": 82,
+        "week": 9,
+        "weekQNum": 3,
+        "question": "After measuring actual performance, organizations compare results with ________.",
+        "options": [
+            "compensation plans",
+            "standards",
+            "labor unions",
+            "inventories"
+        ],
+        "correct": "standards"
+    },
+    {
+        "id": 83,
+        "week": 9,
+        "weekQNum": 4,
+        "question": "Which method belongs to multiple-person evaluation methods?",
+        "options": [
+            "Essay evaluation",
+            "Paired comparison",
+            "Critical incidents",
+            "Checklist method"
+        ],
+        "correct": "Paired comparison"
+    },
+    {
+        "id": 84,
+        "week": 9,
+        "weekQNum": 5,
+        "question": "Which performance appraisal method uses specific, observable behavioural examples as anchors to define different levels of employee performance?",
+        "options": [
+            "KRA",
+            "BARS",
+            "MBO",
+            "HRA"
+        ],
+        "correct": "BARS"
+    },
+    {
+        "id": 85,
+        "week": 9,
+        "weekQNum": 6,
+        "question": "360-degree appraisal mainly provides:",
+        "options": [
+            "confidential anonymous feedback",
+            "annual tax computation records",
+            "product development estimates",
+            "inventory utilization statistics"
+        ],
+        "correct": "confidential anonymous feedback"
+    },
+    {
+        "id": 86,
+        "week": 9,
+        "weekQNum": 7,
+        "question": "If innovation is a company’s strategic objective, performance standards should include metrics related to:",
+        "options": [
+            "administrative hierarchy",
+            "employee attendance frequency",
+            "new ideas and implemented projects",
+            "warehouse inventory movement"
+        ],
+        "correct": "new ideas and implemented projects"
+    },
+    {
+        "id": 87,
+        "week": 9,
+        "weekQNum": 8,
+        "question": "InnovateTech included participation in cross-functional ________ as part of performance standards.",
+        "options": [
+            "outsourcing",
+            "auditing",
+            "training",
+            "marketing"
+        ],
+        "correct": "training"
+    },
+    {
+        "id": 88,
+        "week": 9,
+        "weekQNum": 9,
+        "question": "Quantitative criteria include measurable factors such as sales figures and project completion ________.",
+        "options": [
+            "behaviors",
+            "policies",
+            "attitudes",
+            "times"
+        ],
+        "correct": "times"
+    },
+    {
+        "id": 89,
+        "week": 9,
+        "weekQNum": 10,
+        "question": "Intentional performance rating distortion refers to:",
+        "options": [
+            "deliberate manipulation of ratings",
+            "accidental system calculation errors",
+            "technological communication failures",
+            "legal auditing inconsistencies"
+        ],
+        "correct": "deliberate manipulation of ratings"
+    },
+    {
+        "id": 90,
+        "week": 10,
+        "weekQNum": 1,
+        "question": "In the balanced score approach, return on equity is classified as a:",
+        "options": [
+            "behavioral indicator",
+            "lag indicator",
+            "recruitment indicator",
+            "training indicator"
+        ],
+        "correct": "lag indicator"
+    },
+    {
+        "id": 91,
+        "week": 10,
+        "weekQNum": 2,
+        "question": "The 9 Box Matrix evaluates potential rating and:",
+        "options": [
+            "compensation ratio",
+            "training frequency",
+            "attendance score",
+            "performance rating"
+        ],
+        "correct": "performance rating"
+    },
+    {
+        "id": 92,
+        "week": 10,
+        "weekQNum": 3,
+        "question": "State True and False On-time delivery was identified as a lead indicator for customers.",
+        "options": [
+            "True",
+            "False"
+        ],
+        "correct": "True"
+    },
+    {
+        "id": 93,
+        "week": 10,
+        "weekQNum": 4,
+        "question": "Product defect rate and unit product cost were categorized under:",
+        "options": [
+            "internal business processes",
+            "external customer relations",
+            "workforce engagement",
+            "strategic compensation planning"
+        ],
+        "correct": "internal business processes"
+    },
+    {
+        "id": 94,
+        "week": 10,
+        "weekQNum": 5,
+        "question": "Motivation, ability, and opportunity are analyzed in order to identify:",
+        "options": [
+            "compensation structures",
+            "causes of underperformance",
+            "recruitment procedures",
+            "leadership succession plans"
+        ],
+        "correct": "causes of underperformance"
+    },
+    {
+        "id": 95,
+        "week": 10,
+        "weekQNum": 6,
+        "question": "Variable pay includes bonuses, incentives, and stock ________.",
+        "options": [
+            "exchange",
+            "allocation",
+            "option",
+            "planning"
+        ],
+        "correct": "option"
+    },
+    {
+        "id": 96,
+        "week": 10,
+        "weekQNum": 7,
+        "question": "Which of the following is classified as a non-financial reward?",
+        "options": [
+            "retirement pension",
+            "family picnic",
+            "performance bonus",
+            "stock option"
+        ],
+        "correct": "family picnic"
+    },
+    {
+        "id": 97,
+        "week": 10,
+        "weekQNum": 8,
+        "question": "Skills Gap Analysis identifies differences between current workforce skills and:",
+        "options": [
+            "transportation requirements",
+            "inventory classifications",
+            "future organizational needs",
+            "taxation regulations"
+        ],
+        "correct": "future organizational needs"
+    },
+    {
+        "id": 98,
+        "week": 10,
+        "weekQNum": 9,
+        "question": "DEI stands for Diversity, Equity, and:",
+        "options": [
+            "Integrity",
+            "Investment",
+            "Innovation",
+            "Inclusion"
+        ],
+        "correct": "Inclusion"
+    },
+    {
+        "id": 99,
+        "week": 10,
+        "weekQNum": 10,
+        "question": "Compensation philosophy mainly defines the organization’s:",
+        "options": [
+            "transportation infrastructure",
+            "employee value proposition",
+            "taxation reporting mechanism",
+            "warehouse planning strategy"
+        ],
+        "correct": "employee value proposition"
+    },
+    {
+        "id": 100,
+        "week": 11,
+        "weekQNum": 1,
+        "question": "Pay mix policies included analysis of base wage, benefits, and:",
+        "options": [
+            "transportation allowance",
+            "long-term incentives",
+            "taxation credits",
+            "inventory rewards"
+        ],
+        "correct": "long-term incentives"
+    },
+    {
+        "id": 101,
+        "week": 11,
+        "weekQNum": 2,
+        "question": "State true and false Job evaluation points are linked with compensation and benefits amounts.",
+        "options": [
+            "True",
+            "False"
+        ],
+        "correct": "True"
+    },
+    {
+        "id": 102,
+        "week": 11,
+        "weekQNum": 3,
+        "question": "Compensation matrices primarily help organizations align compensation with:",
+        "options": [
+            "job worth and evaluation points",
+            "warehouse efficiency",
+            "taxation compliance",
+            "transportation scheduling"
+        ],
+        "correct": "job worth and evaluation points"
+    },
+    {
+        "id": 103,
+        "week": 11,
+        "weekQNum": 4,
+        "question": "Impact of pay increase on employees compared old employees with:",
+        "options": [
+            "contractual workers",
+            "consultants",
+            "new employees",
+            "interns"
+        ],
+        "correct": "new employees"
+    },
+    {
+        "id": 104,
+        "week": 11,
+        "weekQNum": 5,
+        "question": "Quartile-wise salary analysis is mainly used for identifying:",
+        "options": [
+            "supply chain gaps",
+            "pay-gap patterns",
+            "transportation inefficiencies",
+            "inventory shortages"
+        ],
+        "correct": "pay-gap patterns"
+    },
+    {
+        "id": 105,
+        "week": 11,
+        "weekQNum": 6,
+        "question": "Employee benefit analysis included retirement plans and:",
+        "options": [
+            "transportation insurance",
+            "taxation assistance",
+            "warehouse maintenance",
+            "wellness programs"
+        ],
+        "correct": "wellness programs"
+    },
+    {
+        "id": 106,
+        "week": 11,
+        "weekQNum": 7,
+        "question": "Work attendance was one qualifying criterion for ________ incentive plans.",
+        "options": [
+            "departmental",
+            "individual",
+            "regional",
+            "operational"
+        ],
+        "correct": "individual"
+    },
+    {
+        "id": 107,
+        "week": 11,
+        "weekQNum": 8,
+        "question": "Companywide incentive plans may be linked to operational efficiency and:",
+        "options": [
+            "transportation expenses",
+            "office maintenance",
+            "employee stock earnings",
+            "inventory movement"
+        ],
+        "correct": "employee stock earnings"
+    },
+    {
+        "id": 108,
+        "week": 11,
+        "weekQNum": 9,
+        "question": "Compa Ratio is calculated using employee pay rate and:",
+        "options": [
+            "pay range midpoint",
+            "annual tax rate",
+            "transportation allowance",
+            "inventory value"
+        ],
+        "correct": "pay range midpoint"
+    },
+    {
+        "id": 109,
+        "week": 11,
+        "weekQNum": 10,
+        "question": "Hiring management trainees was suggested to build a talent ________.",
+        "options": [
+            "network",
+            "matrix",
+            "pipeline",
+            "database"
+        ],
+        "correct": "pipeline"
+    },
+    {
+        "id": 110,
+        "week": 12,
+        "weekQNum": 1,
+        "question": "Which statement best explains the role of Tableau in HR Analytics?",
+        "options": [
+            "It primarily stores employee records",
+            "It converts data into visual analytical insights",
+            "It primarily manages employee communication",
+            "It primarily develops organizational websites"
+        ],
+        "correct": "It converts data into visual analytical insights"
+    },
+    {
+        "id": 111,
+        "week": 12,
+        "weekQNum": 2,
+        "question": "True OR False Tableau can work with information obtained from different types of data sources.",
+        "options": [
+            "True",
+            "False"
+        ],
+        "correct": "True"
+    },
+    {
+        "id": 112,
+        "week": 12,
+        "weekQNum": 3,
+        "question": "Which visualization would be most suitable for comparing values across different departments?",
+        "options": [
+            "Scatter Plot",
+            "Text Document",
+            "Bar Chart",
+            "Data Table"
+        ],
+        "correct": "Bar Chart"
+    },
+    {
+        "id": 113,
+        "week": 12,
+        "weekQNum": 4,
+        "question": "The calculation of an average joining delay across employees is an example of:",
+        "options": [
+            "Data connection",
+            "Data aggregation",
+            "Data extraction",
+            "Data formatting"
+        ],
+        "correct": "Data aggregation"
+    },
+    {
+        "id": 114,
+        "week": 12,
+        "weekQNum": 5,
+        "question": "Which feature makes Tableau particularly useful for exploring complex datasets?",
+        "options": [
+            "Fixed reporting structure",
+            "Manual data entry process",
+            "Static document preparation",
+            "Interactive visual exploration"
+        ],
+        "correct": "Interactive visual exploration"
+    },
+    {
+        "id": 115,
+        "week": 12,
+        "weekQNum": 6,
+        "question": "Which situation represents multidimensional analysis?",
+        "options": [
+            "Examining one variable in isolation",
+            "Viewing one employee record at a time",
+            "Comparing data across several dimensions",
+            "Studying information in a single fixed view"
+        ],
+        "correct": "Comparing data across several dimensions"
+    },
+    {
+        "id": 116,
+        "week": 12,
+        "weekQNum": 7,
+        "question": "A worksheet in Tableau is best understood as:",
+        "options": [
+            "A collection of connected data sources",
+            "An individual analytical view of data",
+            "A collection of multiple dashboards",
+            "A storage system for employee records"
+        ],
+        "correct": "An individual analytical view of data"
+    },
+    {
+        "id": 117,
+        "week": 12,
+        "weekQNum": 8,
+        "question": "What is the primary benefit of presenting aggregated HR data visually?",
+        "options": [
+            "It increases the number of employee records",
+            "It eliminates the need for source data",
+            "It makes patterns and comparisons easier to interpret",
+            "It prevents users from exploring the underlying data"
+        ],
+        "correct": "It makes patterns and comparisons easier to interpret"
+    },
+    {
+        "id": 118,
+        "week": 12,
+        "weekQNum": 9,
+        "question": "What is the main purpose of creating a calculated field in Tableau?",
+        "options": [
+            "To create a new variable using existing information",
+            "To delete existing variables from the dataset",
+            "To replace the original data source completely",
+            "To convert every variable into a graphical format"
+        ],
+        "correct": "To create a new variable using existing information"
+    },
+    {
+        "id": 119,
+        "week": 12,
+        "weekQNum": 10,
+        "question": "Which Tableau function is appropriate for finding the difference between two dates?",
+        "options": [
+            "DATEADD",
+            "DATENAME",
+            "DATEPART",
+            "DATEDIFF"
+        ],
+        "correct": "DATEDIFF"
+    }
+];
 
     // PRNG for deterministic, reproducible shuffling with seeds
     function createRng(seed) {
@@ -1728,7 +3131,7 @@
         // Card Feedback Area
         let feedbackHtml = '';
         if (isAnswered) {
-          const noteText = NOTES_MAP[q.id];
+          const noteText = (typeof NOTES_MAP !== 'undefined' && NOTES_MAP) ? NOTES_MAP[q.id] : null;
           const noteHtml = noteText ? `<div class="explanation-callout"><strong>Examination Clarification:</strong> ${escapeHtml(noteText)}</div>` : '';
 
           if (isCorrect) {
